@@ -24,10 +24,10 @@
 }
 
 body{
-  background-image: url('Images/background-image.jpg');
+  background-image: url('Images/svgs/landing.svg');
   /* background-color: darkgray; */
   background-repeat: no-repeat;
-  background-size: 100% 100%;
+  background-size: cover;
 }
 
 

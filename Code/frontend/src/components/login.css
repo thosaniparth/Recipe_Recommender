@@ -1,10 +1,11 @@
 #parent {
-    display: table;
-    margin-top: 20%;
+   overflow-y: hidden;
     width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
  }
  #form_login {
-    display: table-cell;
     text-align: center;
     vertical-align: middle;
  }
@@ -12,4 +13,9 @@
 .login-btn{
      background-color:black;
      color: white;
+ }
+
+ #form_login > div > label{
+   text-transform: uppercase;
+   font-weight: 800;
  }

@@ -76,7 +76,7 @@ describe("/ checking api status", () => {
   it("it should give 404 not found error", (done) => {
     let promise = new Promise((resolve, reject) => {
       const uri =
-        "mongodb+srv://hselvar2:hselvar2@cluster0.e7zgr.mongodb.net/recipe?retryWrites=true&w=majority";
+        "mongodb+srv://snisar:Ydl07TZvkYyVeJYH@cluster0.ahpmzgu.mongodb.net/recipe?retryWrites=true&w=majority";
       var result = false;
       try {
         // Connect to the MongoDB cluster

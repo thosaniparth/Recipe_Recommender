@@ -3,6 +3,7 @@ import recipeDB from "../apis/recipeDB";
 import { Redirect, withRouter } from "react-router";
 import "./login.css";
 import Header from "./Header";
+import styled from 'styled-components';
 // import '../../node_modules/bootstrap/dist/css/bootstrap.css'
 
 function loginForm(props) {
@@ -58,11 +59,11 @@ function loginForm(props) {
   };
 
   return (
-    <div>
+    <MainContainer>
       <Header loginFlag={false} />
 
-      <div id="parent">
-        <form id="form_login">
+      <div id="parent" style={{ height: '100%' }}>
+        <StyledForm id="form_login">
           <div>
             <label>Username</label>
             <input
@@ -98,9 +99,23 @@ function loginForm(props) {
           {state.failMessage ? (
             <div style={{ color: "red" }}>{state.failMessage}</div>
           ) : null}
-        </form>
+        </StyledForm>
       </div>
-    </div>
+    </MainContainer>
   );
 }
 export default withRouter(loginForm);
+
+const MainContainer = styled.div`
+  height: 100vh;
+  overflow-y: hidden;
+`;
+
+const StyledForm = styled.form`
+  width: 50%;
+  margin: auto;
+  background-color: #eee;
+  padding: 32px;
+  vertical-align: middle;
+  border-radius: 18px;
+`;

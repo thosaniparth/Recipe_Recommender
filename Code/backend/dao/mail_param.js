@@ -1,5 +1,5 @@
 const pwd = {
-  password: "Simran@3571",
+  password: "Macromedic@123",
 };
 
 module.exports = pwd;
