@@ -4,6 +4,7 @@ const morgan = require('morgan');
 const app = express();
 const colors = require("colors");
 const connectDB = require('./config/db.js');
+const {notFound, errorHandling} = require('./middleware/errorhandling.js')
 
 colors.enable();
 
@@ -17,6 +18,8 @@ connectDB();
 app.use(express.urlencoded());
 app.use(cors({ credentials: true }));
 app.use(cors());
+
+app.use(notFound, errorHandling);
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
