@@ -3,6 +3,7 @@ const dotenv = require('dotenv');
 const morgan = require('morgan');
 const app = express();
 const colors = require("colors");
+const connectDB = require('./config/db.js');
 
 colors.enable();
 
@@ -10,6 +11,8 @@ const cors = require('cors');
 app.use(express.json());
 
 dotenv.config();
+
+connectDB();
 
 app.use(express.urlencoded());
 app.use(cors({ credentials: true }));
