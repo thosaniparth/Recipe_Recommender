@@ -1,16 +1,18 @@
 const express = require('express');
 const signInRouter = express.Router();
 const signUpRouter = express.Router();
+const signOutRouter = express.Router();
 
 const {
     signInGet,
     signUpGet,
     signInPost,
-    signUpPost
+    signUpPost,
+    signOutGet
 } = require("../controllers/user");
 
 signInRouter
-    .route("/")
+    .route("/users/authorizeUser")
     .get(signInGet)
     .post(signInPost)
 
@@ -19,7 +21,12 @@ signUpRouter
     .get(signUpGet)
     .post(signUpPost)
 
+signOutRouter
+    .route("/")
+    .get(signOutGet)
+
 module.exports = {
     signInRouter,
-    signUpRouter
+    signUpRouter,
+    signOutRouter
 }

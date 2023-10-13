@@ -61,9 +61,18 @@ const signInPost = async (req, res) => {
     }
 }
 
+const signOutGet = async (req, res) => {
+    try {
+        req.logout();
+    } catch (err) {
+        throw err;
+    }
+};
+
 module.exports = {
     signInGet,
     signInPost,
     signUpGet,
-    signUpPost
+    signUpPost,
+    signOutGet
 };
