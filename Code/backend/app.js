@@ -25,15 +25,17 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
-const {signInRouter, signUpRouter} = require('./routes/user.js');
+const {signInRouter, signUpRouter, signOutRouter, userProfileRouter } = require('./routes/user.js');
 
 app.get("/", async(req, res) => {
   console.log("Hello");
   res.send("Hello");
 });
 
-app.use("/signIn", signInRouter);
-app.use("/signUp", signUpRouter);
+app.use("/api/v4/signIn", signInRouter);
+app.use("/api/v4/signUp", signUpRouter);
+app.use("/api/v4/signOut", signOutRouter);
+app.use("/api/v4/userProfile", userProfileRouter);
 
 const PORT = process.env.PORT || 5000;
 

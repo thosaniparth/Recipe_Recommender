@@ -1,12 +1,13 @@
 import React, { useState, useContext } from "react";
-import recipeDB from "../apis/recipeDB";
+import recipeDB from "../../apis/recipeDB";
 import { Redirect, withRouter } from "react-router";
 import "./login.css";
-import Header from "./Header";
 import styled from 'styled-components';
+import { useHistory } from 'react-router-dom';
 // import '../../node_modules/bootstrap/dist/css/bootstrap.css'
 
-function loginForm(props) {
+function signupForm(props) {
+  const history = useHistory();
   if (sessionStorage.getItem("login_recipe_recommender")) {
     props.history.push("/home");
   }
@@ -33,26 +34,26 @@ function loginForm(props) {
       password: state.password,
     };
     const response = await recipeDB
-      .post("/users/authorizeUser", stateTemp)
+      .post("/signUp", stateTemp)
       .catch((err) => {
         console.log(err, err.message);
       });
     if (response) {
       setState((prevState) => ({
         ...prevState,
-        successMessage: "Login successful. Redirecting to home page..",
+        successMessage: "Sign Up successful. Redirecting to home page..",
         failMessage: null,
       }));
       sessionStorage.setItem(
         "login_recipe_recommender",
-        response.data["username"]
+        state.username
       );
       props.setLoginFlag;
-      props.history.push("/home");
+      props.history.push("/login");
     } else {
       setState((prevState) => ({
         ...prevState,
-        failMessage: "Login unsuccessful. Please try again.",
+        failMessage: "Sign Up unsuccessful. Please try again.",
         successMessage: null,
       }));
     }
@@ -60,11 +61,10 @@ function loginForm(props) {
 
   return (
     <MainContainer>
-      <Header loginFlag={false} />
-
       <div id="parent" style={{ height: '100%' }}>
         <StyledForm id="form_login">
           <div>
+          <StlyedH1>SIGN UP</StlyedH1>
             <label>Username</label>
             <input
               type="text"
@@ -99,12 +99,18 @@ function loginForm(props) {
           {state.failMessage ? (
             <div style={{ color: "red" }}>{state.failMessage}</div>
           ) : null}
+
+          <i><StyledLink onClick={() => history.push("/login")}>Sign-In</StyledLink> instead!</i>
         </StyledForm>
       </div>
     </MainContainer>
   );
 }
-export default withRouter(loginForm);
+export default withRouter(signupForm);
+
+const StlyedH1 = styled.h1`
+  margin-top: 12px;
+`;
 
 const MainContainer = styled.div`
   height: 100vh;
@@ -118,4 +124,10 @@ const StyledForm = styled.form`
   padding: 32px;
   vertical-align: middle;
   border-radius: 18px;
+  background-color: rgba(255, 255, 255, 0.95);
+`;
+
+const StyledLink = styled.a`
+  color: #ff5252;
+  cursor: pointer;
 `;
