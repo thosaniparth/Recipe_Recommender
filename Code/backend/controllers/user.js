@@ -49,9 +49,11 @@ const signInPost = async (req, res) => {
                 const token  = generateToken(req.body.username);
                 res.send(token);
             } else {
+                res.status(500).send('Incorrect username or password');
                 throw new Error('Incorrect username or password');
             }
         } else {
+            res.status(500).send('Incorrect username or password');
             throw new Error('Incorrect username or password');
         }
     } catch (err) {
