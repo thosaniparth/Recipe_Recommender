@@ -30,8 +30,8 @@ app.get("/", async(req, res) => {
   res.send("Hello");
 });
 
-app.use("/signIn", signInRouter);
-app.use("/signUp", signUpRouter);
+app.use("/api/v4/signIn", signInRouter);
+app.use("/api/v4/signUp", signUpRouter);
 
 const PORT = process.env.PORT || 5000;
 
