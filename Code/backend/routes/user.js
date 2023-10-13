@@ -12,7 +12,7 @@ const {
 } = require("../controllers/user");
 
 signInRouter
-    .route("/users/authorizeUser")
+    .route("/")
     .get(signInGet)
     .post(signInPost)
 
