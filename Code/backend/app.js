@@ -19,8 +19,6 @@ app.use(express.urlencoded());
 app.use(cors({ credentials: true }));
 app.use(cors());
 
-app.use(notFound, errorHandling);
-
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
