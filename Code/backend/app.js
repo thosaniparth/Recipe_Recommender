@@ -15,11 +15,9 @@ dotenv.config();
 
 connectDB();
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({extended:true}));
 app.use(cors({ credentials: true }));
 app.use(cors());
-
-app.use(notFound, errorHandling)
 
 if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
@@ -37,6 +35,8 @@ app.use("/api/v4/signUp", signUpRouter);
 app.use("/api/v4/signOut", signOutRouter);
 app.use("/api/v4/userProfile", userProfileRouter);
 
+
+app.use(notFound, errorHandling)
 const PORT = process.env.PORT || 5000;
 
 app.listen(
