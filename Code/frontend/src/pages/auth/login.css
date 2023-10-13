@@ -1,0 +1,48 @@
+#parent {
+   overflow-y: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ #form_login {
+    text-align: center;
+    vertical-align: middle;
+ }
+
+ #form_login > div > label{
+   text-transform: uppercase;
+   font-weight: 800;
+ }
+
+ @supports (-webkit-backdrop-filter: none) or (backdrop-filter: none) {
+   #form_login {
+     -webkit-backdrop-filter: blur(10px);
+     backdrop-filter: blur(10px);
+     background-color: rgba(255, 255, 255, 0.5);  
+   }
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover, 
+input:-webkit-autofill:focus, 
+input:-webkit-autofill:active{
+    -webkit-box-shadow: 0 0 0 30px white inset !important;
+}
+
+#parent {
+   overflow-y: hidden;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+ }
+ #form_login {
+    text-align: center;
+    vertical-align: middle;
+ }
+
+.login-btn{
+     background-color:black;
+     color: white;
+ }
