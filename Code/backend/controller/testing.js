@@ -3,9 +3,6 @@
 // import password from "./mail_param.js";
 
 const mongodb = require("mongodb");
-const nodemailer = require("nodemailer");
-const password = require("./mail_param");
-const pass = password.password;
 // import 'requests' from requests;
 // import axios from "axios";
 const axios = require("axios");
@@ -16,18 +13,6 @@ const ObjectId = mongodb.ObjectId;
 let recipes;
 //Function to connect to DB
 class RecipesDAO {
-  static async injectDB(conn) {
-    if (recipes) {
-      return;
-    }
-    try {
-      recipes = await conn.db(process.env.RECIPES_NS).collection("recipe");
-    } catch (e) {
-      console.error(
-        `Unable to establish a collection handle in recipesDAO: ${e}`
-      );
-    }
-  }
 
   static async postRecipes(addRecipeDetails) {
     console.log("inside dao");
@@ -70,9 +55,7 @@ class RecipesDAO {
           };
         }
         query["Cuisine"] = filters["Cuisine"];
-        var email = filters["Email"];
         var flagger = filters["Flag"];
-        console.log(email);
         console.log(flagger);
         console.log(query);
       }
@@ -131,13 +114,13 @@ class RecipesDAO {
 
         // console.log(total_cal)
         // 6c6cd52f12d5f99f0bf67d14e8c3547d
-        recipesList[j - 1]["calories"] = total_cal.toFixed(2);
-        str_mail += "\nRecipe " + j + ": \n";
-        str_mail += recipesList[j - 1]["TranslatedRecipeName"] + "\n";
-        str_mail += "Time taken to prepare the recipe: \n";
-        str_mail += recipesList[j - 1]["TotalTimeInMins"] + " mins \n";
-        str_mail += "Total Calories in the food item: \n";
-        str_mail += recipesList[j - 1]["calories"] + " calories \n";
+        // recipesList[j - 1]["calories"] = total_cal.toFixed(2);
+        // str_mail += "\nRecipe " + j + ": \n";
+        // str_mail += recipesList[j - 1]["TranslatedRecipeName"] + "\n";
+        // str_mail += "Time taken to prepare the recipe: \n";
+        // str_mail += recipesList[j - 1]["TotalTimeInMins"] + " mins \n";
+        // str_mail += "Total Calories in the food item: \n";
+        // str_mail += recipesList[j - 1]["calories"] + " calories \n";
         // console.log(str_mail);
         // var new_str = recipesList[j - 1]["Cleaned-Ingredients"].replace(
         //   /,/g,
@@ -147,36 +130,36 @@ class RecipesDAO {
         // console.log(recipesList[j-1])
       }
 
-      if (flagger == "true") {
-        var transporter = nodemailer.createTransport({
-          host: "smtp.gmail.com",
-          port: 465,
-          secure: true,
-          auth: {
-            user: "macromedic.premium@gmail.com",
-            pass: pass,
-          },
-        });
+      // if (flagger == "true") {
+      //   var transporter = nodemailer.createTransport({
+      //     host: "smtp.gmail.com",
+      //     port: 465,
+      //     secure: true,
+      //     auth: {
+      //       user: "simran.walmart@gmail.com",
+      //       pass: pass,
+      //     },
+      //   });
 
-        var mailOptions = {
-          from: "macromedic.premium@gmail.com",
-          to: email,
-          subject: "Your Recommended Recipes!",
-          text: str_mail,
-        };
+      //   var mailOptions = {
+      //     from: "simran.walmart@gmail.com",
+      //     to: email,
+      //     subject: "Your Recommended Recipes!",
+      //     text: str_mail,
+      //   };
 
-        var mail_test_code;
-        transporter.sendMail(mailOptions, function (error, info) {
-          if (error) {
-            console.log(error);
-          } else {
-            mail_test_code = info.response;
-            console.log("Email sent: " + info.response);
-          }
-        });
-      }
+      //   var mail_test_code;
+      //   transporter.sendMail(mailOptions, function (error, info) {
+      //     if (error) {
+      //       console.log(error);
+      //     } else {
+      //       mail_test_code = info.response;
+      //       console.log("Email sent: " + info.response);
+      //     }
+      //   });
+      // }
 
-      return { recipesList, totalNumRecipes, mail_test_code };
+      return { recipesList, totalNumRecipes};   //, mail_test_code 
     } catch (e) {
       console.error(
         `Unable to convert cursor to array or problem counting documents, ${e}`
@@ -200,4 +183,70 @@ class RecipesDAO {
   // code
 }
 
-module.exports = RecipesDAO;
+// ****************************************************************
+
+class RecipesController {
+  static async apiPostRecipes(req, res, next) {
+    try {
+      console.log("inside controller");
+      let obj = await RecipesDAO.postRecipes(req.body);
+      res.json(obj);
+    } catch (err) {
+      console.log("Error in Post Recipes", err);
+    }
+  }
+
+  static async apiGetRecipes(req, res, next) {
+    const recipesPerPage = req.query.recipesPerPage
+      ? parseInt(req.query.recipesPerPage, 10)
+      : 20;
+    const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+
+    let filters = {};
+    //Checking the query to find the required results
+
+    if (req.query.CleanedIngredients) {
+      filters.CleanedIngredients = req.query.CleanedIngredients;
+      filters.Cuisine = req.query.Cuisine;
+      filters.Email = req.query.Email;
+      filters.Flag = req.query.Flag;
+      filters.totalTime = req.query.totalTime;
+    }
+
+    const { recipesList, totalNumRecipes, mail_test_code } =
+      await RecipesDAO.getRecipes({
+        filters,
+        page,
+        recipesPerPage,
+      });
+
+    let response = {
+      recipes: recipesList,
+      page: page,
+      filters: filters,
+      entries_per_page: recipesPerPage,
+      total_results: totalNumRecipes,
+    };
+    res.json(response);
+  }
+  //Function to get the cuisines
+  static async apiGetRecipeCuisines(req, res, next) {
+    try {
+      let cuisines = await RecipesDAO.getCuisines();
+      res.json(cuisines);
+    } catch (e) {
+      console.log(`api, ${e}`);
+      res.status(500).json({ error: e });
+    }
+  }
+}
+
+
+const express = require("express");
+const router = express.Router();
+//URl to get the recipes
+router.route("/").get(RecipesController.apiGetRecipes);
+
+router.route("/cuisines").get(RecipesController.apiGetRecipeCuisines);
+router.route("/Addrecipes").post(RecipesController.apiPostRecipes);
+module.exports = router;
