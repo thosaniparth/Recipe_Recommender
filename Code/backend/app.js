@@ -22,6 +22,16 @@ if (process.env.NODE_ENV === 'development') {
   app.use(morgan('dev'));
 }
 
+const {signInRouter, signUpRouter} = require('./routes/user.js');
+
+app.get("/", async(req, res) => {
+  console.log("Hello");
+  res.send("Hello");
+});
+
+app.use("/signIn", signInRouter);
+app.use("/signUp", signUpRouter);
+
 const PORT = process.env.PORT || 5000;
 
 app.listen(
