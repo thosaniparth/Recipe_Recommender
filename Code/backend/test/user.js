@@ -49,3 +49,36 @@ describe('Sign In Route', () => {
 		});
     });
 });
+
+describe('Sign Up Route', () => {
+	describe('Get Request', () => {
+		it('should return sign up page', (done) => {
+			chai.request(app)
+				.get('/signUp')
+				.end((err, res) => {
+					if (err) {
+              console.log(err);
+          }
+					res.should.have.status(200);
+					done();
+				});
+		});
+    });
+    describe("Post request", () => {
+        it('should return signed up', (done) => {
+            chai.request(app)
+          .post('/signUp')
+          .send({
+              username: 'tanny',
+              password: 'tanay',
+          })
+          .end((err, res) => {
+              if (err) {
+                  console.log(err);
+              }
+              res.should.have.status(200);
+              done();
+          });
+        });
+    })
+  });
