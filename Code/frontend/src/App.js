@@ -12,7 +12,8 @@ import {
   Routes,
   Switch,
 } from "react-router-dom";
-import login from "./components/login";
+import login from "./pages/auth/login";
+import signup from "./pages/signup";
 // Main component of the project
 class App extends Component {
   // constructor for the App Component
@@ -132,6 +133,13 @@ class App extends Component {
             exact
             path="/login"
             component={login}
+            setLoginFlag={this.setLoginFlag}
+          />
+
+          <Route
+            exact
+            path="/sign-up"
+            component={signup}
             setLoginFlag={this.setLoginFlag}
           />
 
