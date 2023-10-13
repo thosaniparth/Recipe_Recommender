@@ -1,7 +1,7 @@
 import React, { useState, useContext } from "react";
-import recipeDB from "../apis/recipeDB";
+import recipeDB from "../../apis/recipeDB";
 import { Redirect, withRouter } from "react-router";
-import "./auth/login.css";
+import "./login.css";
 import styled from 'styled-components';
 import { useHistory } from 'react-router-dom';
 // import '../../node_modules/bootstrap/dist/css/bootstrap.css'

@@ -13,7 +13,7 @@ import {
   Switch,
 } from "react-router-dom";
 import login from "./pages/auth/login";
-import signup from "./pages/signup";
+import signup from "./pages/auth/signup";
 // Main component of the project
 class App extends Component {
   // constructor for the App Component
@@ -142,6 +142,13 @@ class App extends Component {
             component={signup}
             setLoginFlag={this.setLoginFlag}
           />
+
+          <Route 
+            path="/add-recipe"
+          >
+            <Header loginFlag={this.state.loginFlag} />
+            <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} />
+          </Route>
 
           <Route path="/home">
             <Header loginFlag={this.state.loginFlag} />

@@ -41,9 +41,10 @@ class Form extends Component {
     return (
       <div class="formOutercontainer">
         <form onSubmit={this.handleRecipeSubmit}>
+          <div class="add-a-recipe">Add a Recipe</div>
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
-              <label class="sideLabel"> Recipe Name: </label> <br />
+            <div className="input-group col-lg-4 bg-danger flexer">
+              <label class="sideLabel"> Recipe Name: </label> 
               <div className="input-group-append">
                 <input type="text" id="recipe_name" />
               </div>
@@ -51,7 +52,7 @@ class Form extends Component {
           </div>
 
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
+            <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Ingredients: </label> <br />
               <div className="input-group-append">
                 <input type="textarea" id="recipe_ingredients" />
@@ -59,7 +60,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
+            <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Instructions: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_instructions" />
@@ -67,7 +68,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
+            <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Cuisine: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_cuisine" />
@@ -75,7 +76,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
+            <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Time Taken: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_time" />
@@ -83,7 +84,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
+            <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Image URL: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_url" />
@@ -91,7 +92,7 @@ class Form extends Component {
             </div>
           </div>
           <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white">
+            <div className="input-group col-lg-4 bg-danger">
               <div className="input-group-append">
                 <div className="row pb-1">
                   <div className="input-group col-lg-4">
@@ -100,7 +101,7 @@ class Form extends Component {
                       id="submit"
                       onClick={this.handleRecipeSubmit}
                     >
-                      <h4> Submit Recipe </h4>
+                      Submit Recipe
                     </button>
                   </div>
                 </div>
