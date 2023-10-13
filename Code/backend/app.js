@@ -4,7 +4,7 @@ const morgan = require('morgan');
 const app = express();
 const colors = require("colors");
 const connectDB = require('./config/db.js');
-const {notFound, errorHandling} = require('./middleware/errorhandling.js')
+const {notFound, errorHandling} = require('./utils/errorhandling.js')
 
 colors.enable();
 
