@@ -6,6 +6,8 @@
   "type": "commonjs",
   "scripts": {
     "test": "mocha",
+    "start": "node app.js",
+    "server": "nodemon app.js",
     "lint": "eslint 'dao/**.js'",
     "format": "prettier --check ./dao",
     "format:fix": "prettier --write ./dao"
