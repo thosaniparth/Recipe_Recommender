@@ -24,6 +24,8 @@ if (process.env.NODE_ENV === 'development') {
 }
 
 const {signInRouter, signUpRouter, signOutRouter, userProfileRouter } = require('./routes/user.js');
+const {getRecipe, getCuisine, postRecipe} = require('./routes/recipe.js')
+const parsingRecipeData = require('./utils/parsingRecipeData.js')
 
 app.get("/", async(req, res) => {
   console.log("Hello");
@@ -35,6 +37,9 @@ app.use("/api/v4/signUp", signUpRouter);
 app.use("/api/v4/signOut", signOutRouter);
 app.use("/api/v4/userProfile", userProfileRouter);
 
+app.use("/api/v4/recipes", getRecipe)
+app.use("/api/v4/recipes/cuisines", getCuisine)
+app.use("/api/v4/recipes/Addrecipes", parsingRecipeData, postRecipe);
 
 app.use(notFound, errorHandling)
 const PORT = process.env.PORT || 5000;
