@@ -73,7 +73,7 @@ const userProfileGet = async (req, res) => {
     try {
         const user = await User.findOne({username: req.body.username});
         if (user) {
-            return res.status(200).json({user});
+            return res.status(200).send(user);
         } else {
             res.status(500).send('No such user found');
             throw new Error('No such user found');

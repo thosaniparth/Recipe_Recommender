@@ -99,3 +99,23 @@ describe('Sign Out Route', () => {
   });
 });
 
+describe('Get User Profile Test', () => {
+  describe("Get Request", () => {
+    it('should return the user profile', (done) => {
+			chai.request(app)
+        .get('/api/v4/userProfile')
+        .send({
+            username: 'tanay'
+        })
+				.end((err, res) => {
+					if (err) {
+            console.log(err);
+          }
+          res.should.have.status(200);
+          res.body.should.be.a('object');
+          done();
+				});
+		});
+  });
+});
+
