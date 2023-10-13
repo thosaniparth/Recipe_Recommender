@@ -4,6 +4,7 @@ const { generateToken } = require("../utils/generateToken");
 
 const signUpGet = async (req, res) => {
     try {
+        res.status = 200;
         res.send("Sign up page");
     } catch (err) {
         throw err;
