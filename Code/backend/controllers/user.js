@@ -69,10 +69,26 @@ const signOutGet = async (req, res) => {
     }
 };
 
+const userProfileGet = async (req, res) => {
+    try {
+        const user = await User.findOne({username: req.body.username});
+        if (user) {
+            return res.status(200).json({user});
+        } else {
+            res.status(500).send('No such user found');
+            throw new Error('No such user found');
+        }
+
+    } catch (err) {
+        throw err;
+    }
+}
+
 module.exports = {
     signInGet,
     signInPost,
     signUpGet,
     signUpPost,
-    signOutGet
+    signOutGet,
+    userProfileGet,
 };
