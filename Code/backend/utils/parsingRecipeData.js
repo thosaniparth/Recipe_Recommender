@@ -6,7 +6,6 @@ const parsingRecipeData = (req, res, next) => {
   req.body.TotalTimeInMins = req.body.recipe_time
   req.body.imageUrl = req.body.recipe_url
   req.body.TranslatedInstructions = req.body.recipe_instructions
-  console.log(req.body);
   next();
 }
 

@@ -6,7 +6,7 @@ const postRecipe = express.Router();
 const Recipe = require('../models/recipe');
 const Error = require('../errors/error')
 
-
+//************* Database Queries***************** */
 async function postRecipes(addRecipeDetails) {
   console.log("inside model");
   console.log(typeof Recipe)
@@ -19,11 +19,7 @@ async function postRecipes(addRecipeDetails) {
   }
 }
 
-async function getRecipes({
-  filters = null,
-  page = 0,
-  recipesPerPage = 10,
-} = {}){
+async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}){
   let query;
   console.log("heeere", filters);
   if (filters) {
@@ -38,31 +34,46 @@ async function getRecipes({
       console.log(str);
       if (time) {
         query = {
-          "Cleaned-Ingredients": { $regex: str },
+          CleanedIngredients: { $regex: str },
           TotalTimeInMins: { $lte: time },
         };
       } else {
         query = {
-          "Cleaned-Ingredients": { $regex: str },
+          CleanedIngredients: { $regex: str },
         };
       }
-      query["Cuisine"] = filters["Cuisine"];
+      if(query.Cuisine){
+        query["Cuisine"] = filters["Cuisine"];
+      }
       console.log(query);
     }
   }
 
   let cursor;
+  let recipesList;
+  let totalNumRecipes;
 
   try {
     cursor = await Recipe
       .find(query)
       .collation({ locale: "en", strength: 2 });
+    console.log(cursor);
   } catch (e) {
     console.error(`Unable to issue find command, ${e}`);
     return { recipesList: [], totalNumRecipess: 0 };
   }
-
-  const displayCursor = cursor.limit(recipesPerPage);
+  
+  // const displayCursor = cursor.skip(page*recipesPerPage).limit(recipesPerPage);
+  try {
+    recipesList = cursor //displayCursor.toArray();
+    totalNumRecipes = cursor.length;
+    return { recipesList, totalNumRecipes};
+  } catch (e) {
+    console.error(
+      `Unable to convert cursor to array or problem counting documents, ${e}`
+    );
+    return { recipesList: [], totalNumRecipes: 0};
+  }
   // try {
     // some code was deleted from before.
 
@@ -102,6 +113,7 @@ async function getCuisines() {
   }
 }
 
+//*************Recipe Controller******************/
 
 class RecipesController {
   static async apiPostRecipes(req, res, next) {
@@ -148,11 +160,10 @@ class RecipesController {
   //Function to get the cuisines
   static async apiGetRecipeCuisines(req, res, next) {
     try {
-      let cuisines = getCuisines();
-      res.json(cuisines);
+      let cuisines = await getCuisines();
+      console.log(cuisines);
     } catch (e) {
-      console.log(`api, ${e}`);
-      res.status(500).json({ error: e });
+      throw new Error.CustomAPIError(`Get Cusines API Error: ${e}`)
     }
   }
 }
