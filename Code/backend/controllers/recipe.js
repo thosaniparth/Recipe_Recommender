@@ -11,11 +11,11 @@ async function postRecipes(addRecipeDetails) {
   console.log("inside model");
   console.log(typeof Recipe)
   try {
-    const res = Recipe.create(addRecipeDetails);
+    const res = await Recipe.create(addRecipeDetails);
     console.log("1 document inserted");
     console.log(res);
   } catch (error) {
-    Error.CustomAPIError("Document cannot be ineserted: ")
+    console.log("Error in Post Recipes", error);
   }
 }
 
@@ -120,9 +120,10 @@ class RecipesController {
     try {
       console.log("inside controller");
       let obj = await postRecipes(req.body);
-      res.json(obj);
+      res.status(200).json({obj, msg: "Success"});
     } catch (err) {
-      console.log("Error in Post Recipes", err);
+      console.log(err);
+      throw new Error.BadRequestError("There is something wrong with the Add Recipe Form")
     }
   }
 
@@ -140,30 +141,37 @@ class RecipesController {
       filters.Cuisine = req.query.Cuisine;
       filters.totalTime = req.query.totalTime;
     }
-
-    const { recipesList, totalNumRecipes} =
+    try {
+      const { recipesList, totalNumRecipes} =
       await getRecipes({
         filters,
         page,
         recipesPerPage,
       });
 
-    let response = {
-      recipes: recipesList,
-      page: page,
-      filters: filters,
-      entries_per_page: recipesPerPage,
-      total_results: totalNumRecipes,
-    };
-    res.json(response);
+      let response = {
+        recipes: recipesList,
+        page: page,
+        filters: filters,
+        entries_per_page: recipesPerPage,
+        total_results: totalNumRecipes,
+      };
+      return res.status(200).json({response, msg:"Success"});
+    } catch (error) {
+      console.log(error);
+      throw new Error.BadRequestError("There was error processing your queries. Please try again");
+    }
+    
   }
   //Function to get the cuisines
   static async apiGetRecipeCuisines(req, res, next) {
     try {
       let cuisines = await getCuisines();
       console.log(cuisines);
+      return res.status(200).json({cuisines, msg:"Success"});
     } catch (e) {
-      throw new Error.CustomAPIError(`Get Cusines API Error: ${e}`)
+      console.log(e);
+      throw new Error.BadRequestError(`Something went wrong. Please try again`)
     }
   }
 }
