@@ -115,65 +115,68 @@ async function getCuisines() {
 
 //*************Recipe Controller******************/
 
-class RecipesController {
-  static async apiPostRecipes(req, res, next) {
-    try {
-      console.log("inside controller");
-      let obj = await postRecipes(req.body);
-      res.status(200).json({obj, msg: "Success"});
-    } catch (err) {
-      console.log(err);
-      throw new Error.BadRequestError("There is something wrong with the Add Recipe Form")
-    }
-  }
-
-  static async apiGetRecipes(req, res, next) {
-    const recipesPerPage = req.query.recipesPerPage
-      ? parseInt(req.query.recipesPerPage, 10)
-      : 20;
-    const page = req.query.page ? parseInt(req.query.page, 10) : 0;
-
-    let filters = {};
-    //Checking the query to find the required results
-    console.log(req.query.CleanedIngredients);
-    if (req.query.CleanedIngredients) {
-      filters.CleanedIngredients = req.query.CleanedIngredients;
-      filters.Cuisine = req.query.Cuisine;
-      filters.totalTime = req.query.totalTime;
-    }
-    try {
-      const { recipesList, totalNumRecipes} =
-      await getRecipes({
-        filters,
-        page,
-        recipesPerPage,
-      });
-
-      let response = {
-        recipes: recipesList,
-        page: page,
-        filters: filters,
-        entries_per_page: recipesPerPage,
-        total_results: totalNumRecipes,
-      };
-      return res.status(200).json({response, msg:"Success"});
-    } catch (error) {
-      console.log(error);
-      throw new Error.BadRequestError("There was error processing your queries. Please try again");
-    }
-    
-  }
-  //Function to get the cuisines
-  static async apiGetRecipeCuisines(req, res, next) {
-    try {
-      let cuisines = await getCuisines();
-      console.log(cuisines);
-      return res.status(200).json({cuisines, msg:"Success"});
-    } catch (e) {
-      console.log(e);
-      throw new Error.BadRequestError(`Something went wrong. Please try again`)
-    }
+async function apiPostRecipes(req, res, next) {
+  try {
+    console.log("inside controller");
+    let obj = await postRecipes(req.body);
+    res.status(200).json({obj, msg: "Success"});
+  } catch (err) {
+    console.log(err);
+    throw new Error.BadRequestError("There is something wrong with the Add Recipe Form")
   }
 }
 
-module.exports = RecipesController
+async function apiGetRecipes(req, res, next) {
+  const recipesPerPage = req.query.recipesPerPage
+    ? parseInt(req.query.recipesPerPage, 10)
+    : 20;
+  const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+
+  let filters = {};
+  //Checking the query to find the required results
+  console.log(req.query.CleanedIngredients);
+  if (req.query.CleanedIngredients) {
+    filters.CleanedIngredients = req.query.CleanedIngredients;
+    filters.Cuisine = req.query.Cuisine;
+    filters.totalTime = req.query.totalTime;
+  }
+  try {
+    const { recipesList, totalNumRecipes} =
+    await getRecipes({
+      filters,
+      page,
+      recipesPerPage,
+    });
+
+    let response = {
+      recipes: recipesList,
+      page: page,
+      filters: filters,
+      entries_per_page: recipesPerPage,
+      total_results: totalNumRecipes,
+    };
+    return res.status(200).json({response, msg:"Success"});
+  } catch (error) {
+    console.log(error);
+    throw new Error.BadRequestError("There was error processing your queries. Please try again");
+  }
+    
+}
+
+//Function to get the cuisines
+async function apiGetRecipeCuisines(req, res, next) {
+  try {
+    let cuisines = await getCuisines();
+    console.log(cuisines);
+    return res.status(200).json({cuisines, msg:"Success"});
+  } catch (e) {
+    console.log(e);
+    throw new Error.BadRequestError(`Something went wrong. Please try again`)
+  }
+}
+
+module.exports = {
+  apiGetRecipes,
+  apiPostRecipes,
+  apiGetRecipeCuisines
+}
