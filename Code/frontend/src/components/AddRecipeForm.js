@@ -1,9 +1,13 @@
 import React, { Component } from "react";
+import { Redirect } from 'react-router-dom';
+import recipeDB from "../apis/recipeDB";
+import styled from 'styled-components';
 
 // Form component to maintain input form
 class Form extends Component {
   // constructor for Form Component
   // We maintain user input as a state object
+  
   constructor() {
     super();
 
@@ -13,6 +17,8 @@ class Form extends Component {
       ingredients: new Set(),
       cuisineState: 0,
       cuisine: "",
+      error: false,
+      redirect: false
     };
   }
   // function to send the data to the parent App component
@@ -29,7 +35,57 @@ class Form extends Component {
     ).value;
     dict["recipe_time"] = document.getElementById("recipe_time").value;
     dict["recipe_url"] = document.getElementById("recipe_url").value;
+    console.log(dict);
+
+    let all_val_filled = []
+    Object.keys(dict).map((key, value) => {
+      console.log(key, dict[key]);
+      if (dict[key] != ""){
+        all_val_filled.push(key)
+      } 
+    })
+
     this.props.sendRecipeFormData(dict);
+    console.log(all_val_filled);
+    if(all_val_filled.length == 6){
+      this.submitToApi(dict);
+      this.setState({
+        // cuisine : "Any",
+        //numberIngredients : 0,
+        ingredients: new Set(),
+        cuisineState: 0,
+        cuisine: "",
+        redirect: true,
+        error: true
+      });
+    } else {
+      this.setState({
+        // cuisine : "Any",
+        //numberIngredients : 0,
+        ingredients: new Set(),
+        cuisineState: 0,
+        cuisine: "",
+        redirect: false,
+        error: true
+      });
+    }
+  };
+
+  submitToApi = async (dict) => {
+    const response = await recipeDB
+      .post("/recipes/Addrecipes", dict)
+      .catch((err) => {
+        console.log(err, err.message);
+      });
+    if (response) {
+      console.log("Added...")
+    } else {
+      console.log("Failed...")
+    }
+  };
+
+  renderRedirect = () => {
+    return <Redirect to='/home' />
   };
 
   // render function dispays the UI content i.e the form content
@@ -40,13 +96,14 @@ class Form extends Component {
     // returns jsx element
     return (
       <div class="formOutercontainer">
-        <form onSubmit={this.handleRecipeSubmit}>
+        <form onSubmit={this.handleRecipeSubmit} required>
           <div class="add-a-recipe">Add a Recipe</div>
+          {this.state.error && <StyledError>Kindly fill all the fields.</StyledError>}
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Name: </label> 
               <div className="input-group-append">
-                <input type="text" id="recipe_name" />
+                <input type="text" id="recipe_name" required={true}/>
               </div>
             </div>
           </div>
@@ -55,7 +112,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Ingredients: </label> <br />
               <div className="input-group-append">
-                <input type="textarea" id="recipe_ingredients" />
+                <input type="textarea" id="recipe_ingredients" required/>
               </div>
             </div>
           </div>
@@ -63,7 +120,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Instructions: </label> <br />
               <div className="input-group-append">
-                <input type="text" id="recipe_instructions" />
+                <input type="text" id="recipe_instructions" required/>
               </div>
             </div>
           </div>
@@ -71,7 +128,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Cuisine: </label> <br />
               <div className="input-group-append">
-                <input type="text" id="recipe_cuisine" />
+                <input type="text" id="recipe_cuisine" required/>
               </div>
             </div>
           </div>
@@ -91,7 +148,7 @@ class Form extends Component {
           </div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Image URL: </label> <br />
+              <label class="sideLabel"> Recipe URL: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_url" />
               </div>
@@ -102,6 +159,7 @@ class Form extends Component {
               <div className="input-group-append">
                 <div className="row pb-1">
                   <div className="input-group col-lg-4">
+                    {this.state.redirect && this.renderRedirect()}
                     <button
                       type="button"
                       id="submit"
@@ -121,3 +179,12 @@ class Form extends Component {
 }
 
 export default Form;
+
+const StyledError = styled.div`
+  color: #c62828;
+  background-color: #ef9a9a;
+  border: 2px solid #c62828;
+  padding: 8px;
+  margin: 8px auto;
+  border-radius: 8px;
+`;

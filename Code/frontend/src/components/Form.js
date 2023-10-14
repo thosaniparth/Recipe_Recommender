@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { useHistory } from 'react-router-dom';
 
 // Form component to maintain input form
 class Form extends Component {
@@ -133,6 +134,7 @@ class Form extends Component {
 
   // render function dispays the UI content i.e the form content
   render() {
+
     {
       /* const cuisine_list = [ "Any", "Mexican", "Swedish", "Latvian", "Italian",
         "Spanish", "American","Scottish","British","Thai","Japanese","Chinese",
