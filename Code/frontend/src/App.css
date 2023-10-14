@@ -92,12 +92,41 @@ body{
   display : inline-block;
 }
 
+.sideLabel-new{
+  float: left;
+  text-align: left;
+  font-size : large;
+  font-weight : bold;
+  margin : 0px 0;
+  color: #333;
+
+  display : inline-block;
+  width: 140px;
+}
+
 .flexer{
   display: flex !important;
   flex-direction: row !important;
   justify-content: space-between !important;
   align-items: center !important;
   width: 100% !important;
+  margin: 12px auto;
+}
+
+.flexer-new{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: stretch !important;
+  align-items: center !important;
+  width: 100% !important;
+  margin: 12px auto;
+}
+
+.items-returned{
+  display: flex !important;
+  flex-direction: row !important;
+  justify-content: stretch !important;
+  align-items: center !important;
   margin: 12px auto;
 }
 
@@ -117,31 +146,33 @@ input {
 }
 
 /* Styling for the list that is displayed after addItem button click */
-ul.addedIngredientList{
+.addedIngredientList{
 
-  margin-left: 5%;
-  margin-bottom: 5%;
+  margin-left: 28px;
+  margin-bottom: 0;
   
-  display: inline;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
   height: fit-content;
 
 }
 
 /* Stylings to handle any list items in the entire page span*/
 
-li.addedIngredient,li.recipe_ingredient_item{
+.addedIngredient, .recipe_ingredient_item{
  
-  padding: 12px 20px;
+  padding: 8px 16px;
 
-  margin: 8px 0;
+  margin: 8px;
   margin-left: 2%;
 
   box-sizing: border-box;
   background-color: Transparent;
-  border: 2px solid rgb(165, 161, 161);
+  border: 2px solid #333;
   border-radius: 4px;
-  color: white;
-  border-color: black;
+  color: #333;
   font-size: medium;
   display:inline-table;
   
@@ -349,4 +380,9 @@ li.translated_instruction_item{
 
 .navbar-li-right {
   float: right;
+}
+
+#addButton{
+  background-color:black;
+  color: white;
 }

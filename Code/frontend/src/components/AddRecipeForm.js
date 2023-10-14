@@ -77,9 +77,15 @@ class Form extends Component {
           </div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Time Taken: </label> <br />
-              <div className="input-group-append">
-                <input type="text" id="recipe_time" />
+              <label class="sideLabel"> Recipe Time: </label> 
+              <div className="input-group-append" style={{ width: '66%' }}>
+                <select name="time_to_cook" id="recipe_time" className="form-input" style={{ width: '100%' }}>
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                  <option value="60">60</option>
+                </select>
+                {/* <input type="text" id="recipe_time" /> */}
               </div>
             </div>
           </div>

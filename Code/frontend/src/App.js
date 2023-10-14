@@ -152,7 +152,6 @@ class App extends Component {
 
           <Route path="/home">
             <Header loginFlag={this.state.loginFlag} />
-            <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} />
             <Form sendFormData={this.handleSubmit} />
             {/* <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} /> */}
 
