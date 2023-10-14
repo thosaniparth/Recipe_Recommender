@@ -14,6 +14,7 @@ import {
 } from "react-router-dom";
 import login from "./pages/auth/login";
 import signup from "./pages/auth/signup";
+import Home from "./pages/home/Home";
 // Main component of the project
 class App extends Component {
   // constructor for the App Component
@@ -150,7 +151,7 @@ class App extends Component {
             <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} />
           </Route>
 
-          <Route path="/home">
+          <Route path="/search-recipe">
             <Header loginFlag={this.state.loginFlag} />
             <Form sendFormData={this.handleSubmit} />
             {/* <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} /> */}
@@ -160,6 +161,11 @@ class App extends Component {
                   */}
 
             <RecipeList recipes={this.state.recipeList} />
+          </Route>
+
+          <Route path="/home">
+            <Header loginFlag={this.state.loginFlag} />
+            <Home />
           </Route>
           <Redirect exact from="/" to="login" />
         </Switch>

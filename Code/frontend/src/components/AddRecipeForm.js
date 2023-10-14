@@ -45,7 +45,7 @@ class Form extends Component {
       } 
     })
 
-    this.props.sendRecipeFormData(dict);
+    // this.props.sendRecipeFormData(dict);
     console.log(all_val_filled);
     if(all_val_filled.length == 6){
       this.submitToApi(dict);
