@@ -4,22 +4,27 @@ const {Schema} = mongoose
 const recipeSchema = new Schema(
     {
         TranslatedRecipeName:{
-          type: String
+          type: String,
+          required: [true, "Recipe Name is required"],
         },
         TotalTimeInMins:{
-          type: Number
+          type: Number,
+          required: [true, "Total Time is required"]
         },
         Cuisine:{
-          type: String
+          type: String,
+          required: [true, "Cuisine is required"]
         },
         imageUrl:{
           type: String
         },
         CleanedIngredients:{
           type: String,
+          required: [true, "Ingredients is required"]
         },
         TranslatedInstructions:{
-          type: String
+          type: String,
+          required: [true, "Instructions is required"]
         },
         budget:{
           type: Number
