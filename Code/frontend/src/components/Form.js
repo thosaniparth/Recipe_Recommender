@@ -1,5 +1,8 @@
 import React, { Component } from "react";
 import { useHistory } from 'react-router-dom';
+import recipeDB from "../apis/recipeDB";
+import styled from 'styled-components';
+import RecipeCard from "./RecipeCard";
 
 // Form component to maintain input form
 class Form extends Component {
@@ -14,6 +17,7 @@ class Form extends Component {
       ingredients: new Set(),
       cuisineState: 0,
       cuisine: "",
+      recipes: []
     };
   }
 
@@ -94,24 +98,37 @@ class Form extends Component {
 
   // function to send the data to the parent App component
   // uses the function that is sent through props from the App Component
+
+  searchRecipe = async () => {
+    const budget = document.getElementById("budget").value;
+    const time = document.getElementById("time_to_cook").value
+
+    const response = await recipeDB
+      .get(`/recipes?CleanedIngredients=${this.state.ingredients}&Cuisine=${this.state.ingredients}&budget=${budget}&TotalTimeInMins=${time}`)
+      .catch((err) => {
+        console.log(err, err.message);
+      });
+    if (response) {
+      console.log(response.data);
+      this.setState({
+        // cuisine : "Any",
+        //numberIngredients : 0,
+        ingredients: new Set(),
+        cuisineState: 0,
+        cuisine: "",
+        recipes: response.data.recipes
+      });
+    } else {
+      console.log("Failed...")
+    }
+  };
+
+  
+
   handleSubmit = (event) => {
-    // this.setState(
-    //   {
-    //     //cuisine : this.state.cuisine,
-    //     //numberIngredients : this.state.numberIngredients,
-    //
-    //     ingredients: new Set(this.state.ingredients).add(
-    //       document.getElementById("cuisine").value
-    //     ),
-    //   },
-    //   () => console.log(this.state)
-    // );
 
     this.setState(
       {
-        //cuisine : this.state.cuisine,
-        //numberIngredients : this.state.numberIngredients,
-
         cuisine: document.getElementById("cuisine").value,
       },
       () => console.log(this.state)
@@ -121,98 +138,137 @@ class Form extends Component {
     var dict = {};
     dict["ingredient"] = this.state.ingredients;
     dict["cuisine"] = document.getElementById("cuisine").value;
-    dict["email_id"] = document.getElementById("email_id").value;
-    dict["flag"] = document.getElementById("Send_email").checked;
     dict["time_to_cook"] = document.getElementById("time_to_cook").value;
     console.log("dict value", dict["time_to_cook"]);
-    //this.props.sendFormData(this.state.cuisine, this.state.numberIngredients,this.state.ingredients)
+    
     this.props.sendFormData(dict);
     document.getElementById("cuisine").value = "";
-    document.getElementById("email_id").value = "";
     document.getElementById("time_to_cook").value = "";
+
+    this.searchRecipe();
   };
 
   // render function dispays the UI content i.e the form content
   render() {
-
-    {
-      /* const cuisine_list = [ "Any", "Mexican", "Swedish", "Latvian", "Italian",
-        "Spanish", "American","Scottish","British","Thai","Japanese","Chinese",
-        "Indian","Canadian","Russian","Jewish","Polish","German","French","Hawaiian",
-        "Brazilian", "Peruvian","Cuban","Tibetian","Salvadorian","Egyptian","Greek",
-        "Belgian","Irish","Welsh","Mormon","Cajun","Portugese","Turkish","Haitian",
-    "Tahitian","Kenyan","Korean","Algerian","Nigerian","Libyan" ]*/
-    }
-
     // returns jsx element
     return (
-      <div class="formOutercontainer">
-        <form onSubmit={this.handleSubmit}>
-          <div class="add-a-recipe">Search a Recipe</div>
-          <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new"> Ingredient: </label> 
-              <div>
-                <div className="input-group-append form-input">
-                  <input type="text" id="ingredient" />
-                </div>
-                </div>
-            </div>
-            <div>
-                  <button onClick={this.addHandler} type="button" id="addButton">
-                    Add item
-                  </button>
-                </div>
-          </div>
-
-          <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new"> Cuisine: </label> <br />
-              <div className="input-group-append form-input">
-                <input type="text" id="cuisine" />
-              </div>
-            </div>
-          </div>
-
-          <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new">Time to cook:</label> <br />
-              <select name="time_to_cook" id="time_to_cook" className="form-input">
-                <option value="15">15</option>
-                <option value="30">30</option>
-                <option value="45">45</option>
-                <option value="60">60</option>
-              </select>
-            </div>
-          </div>
-          <div className="row pb-1">
-            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <div className="input-group-append form-input">
-                <div className="row pb-1">
-                  <div className="input-group col-lg-4 flexer-new">
-                    <label class="sideLabel-new">Added Items:</label>
-                    {this.printHander()}
+      <div>
+        <div class="formOutercontainer">
+          <form onSubmit={this.handleSubmit}>
+            <div class="add-a-recipe">Search a Recipe</div>
+            <div className="row pb-1">
+              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+                <label class="sideLabel-new"> Ingredient: </label> 
+                <div>
+                  <div className="input-group-append form-input">
+                    <input type="text" id="ingredient" />
                   </div>
-                </div>
+                  </div>
               </div>
-            </div>
-          </div>
-          
-          <div className="row pb-1">
-                  <div className="input-group col-lg-4">
-                    <button
-                      type="button"
-                      id="submit"
-                      onClick={this.handleSubmit}
-                    >
-                      Search Recipes
+              <div>
+                    <button onClick={this.addHandler} type="button" id="addButton">
+                      Add item
                     </button>
                   </div>
+            </div>
+
+            <div className="row pb-1">
+              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+                <label class="sideLabel-new"> Cuisine: </label> <br />
+                <div className="input-group-append form-input">
+                  <input type="text" id="cuisine" />
                 </div>
-        </form>
+              </div>
+            </div>
+
+            <div className="row pb-1">
+              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+                <label class="sideLabel-new"> Budget: </label> <br />
+                <div className="input-group-append form-input">
+                  <input type="text" id="budget" />
+                </div>
+              </div>
+            </div>
+
+            <div className="row pb-1">
+              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+                <label class="sideLabel-new">Time to cook:</label> <br />
+                <select name="time_to_cook" id="time_to_cook" className="form-input">
+                  <option value="15">15</option>
+                  <option value="30">30</option>
+                  <option value="45">45</option>
+                  <option value="60">60</option>
+                </select>
+              </div>
+            </div>
+            <div className="row pb-1">
+              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+                <div className="input-group-append form-input">
+                  <div className="row pb-1">
+                    <div className="input-group col-lg-4 flexer-new">
+                      <label class="sideLabel-new">Added Items:</label>
+                      {this.printHander()}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            
+            <div className="row pb-1">
+                    <div className="input-group col-lg-4">
+                      <button
+                        type="button"
+                        id="submit"
+                        onClick={this.handleSubmit}
+                      >
+                        Search Recipes
+                      </button>
+                    </div>
+                  </div>
+          </form>
+        </div>
+
+        <div>
+        <StyledFlexer>
+            {this.state.recipes.map((recipe => 
+                (<RecipeCard 
+                CleanedIngredients = {recipe.CleanedIngredients}
+                Cuisine = {recipe.Cuisine}
+                TotalTimeInMins = {recipe.TotalTimeInMins}
+                TranslatedInstructions = {recipe.TranslatedInstructions}
+                TranslatedRecipeName = {recipe.TranslatedRecipeName}
+                imageUrl = {recipe.imageUrl}
+                />)
+            ))}
+        </StyledFlexer>
+        </div>
       </div>
     );
   }
 }
 
 export default Form;
+
+const StyledHeader = styled.div`
+    font-size: 32px;
+    text-align: center;
+    margin: 22px auto;
+    font-weight: 800;
+`;
+
+const StyledCenterFlexer = styled.div`
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    text-align: center;
+`;
+
+const StyledFlexer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+`;

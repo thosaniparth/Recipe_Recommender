@@ -35,6 +35,7 @@ class Form extends Component {
     ).value;
     dict["recipe_time"] = document.getElementById("recipe_time").value;
     dict["recipe_url"] = document.getElementById("recipe_url").value;
+    dict["recipe_budget"] = document.getElementById("recipe_budget").value;
     console.log(dict);
 
     let all_val_filled = []
@@ -116,6 +117,7 @@ class Form extends Component {
               </div>
             </div>
           </div>
+
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Instructions: </label> <br />
@@ -124,6 +126,16 @@ class Form extends Component {
               </div>
             </div>
           </div>
+
+          <div className="row pb-1">
+            <div className="input-group col-lg-4 bg-danger flexer">
+              <label class="sideLabel"> Recipe Budget: </label> <br />
+              <div className="input-group-append">
+                <input type="text" id="recipe_budget" required/>
+              </div>
+            </div>
+          </div>
+
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Cuisine: </label> <br />

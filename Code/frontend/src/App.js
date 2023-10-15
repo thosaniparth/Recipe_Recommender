@@ -160,7 +160,7 @@ class App extends Component {
                   App's recipeList state item is being sent as a prop
                   */}
 
-            <RecipeList recipes={this.state.recipeList} />
+            {/* <RecipeList recipes={this.state.recipeList} /> */}
           </Route>
 
           <Route path="/home">
