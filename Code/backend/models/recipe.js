@@ -31,7 +31,7 @@ const recipeSchema = new Schema(
         },
         typeOfDiet: {
           type: String,
-          enum: ['Vegan', 'Vegetarian', 'Non-Vegitarian'],
+          enum: ['Vegan', 'Vegetarian', 'Non-Vegetarian'],
           message: '${VALUE} is not a diet type.'
         },
         user:{
