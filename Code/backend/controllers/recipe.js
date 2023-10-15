@@ -21,24 +21,24 @@ async function postRecipes(addRecipeDetails) {
 
 async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}){
   let query = {};
-  console.log("heeere", filters);
+  console.log("Filters in getRecipes", filters);
   if (filters) {
     if (filters.CleanedIngredients) {
       var str = "(?i)";
-      var time = parseInt(filters["totalTime"]);
-
+      
       for (var i = 0; i < filters["CleanedIngredients"].length; i++) {
         const str1 = filters["CleanedIngredients"][i];
         str += "(?=.*" + str1 + ")";
       }
       query.CleanedIngredients = { $regex: str }
-      console.log(str);
+      console.log("the search string",str);
     }
+    var time = parseInt(filters["totalTime"]);
     if (time) {
       query.TotalTimeInMins = { $lte: time }
     }
     if (filters["budget"]) {
-        query.budget = {$lte: filters["budget"]}
+        query.budget = {$lte: parseInt(filters["budget"])}
     } 
     if (filters["typeOfDiet"]){
         query.typeOfDiet = filters["typeOfDiet"];
@@ -46,7 +46,7 @@ async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}
     if(filters.Cuisine){
       query["Cuisine"] = filters["Cuisine"];
     }
-    console.log(query);
+    console.log("Final Query for Database", query);
   }
 
   let cursor;
@@ -57,7 +57,7 @@ async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}
     cursor = await Recipe
       .find(query)
       .collation({ locale: "en", strength: 2 });
-    console.log(cursor);
+    // console.log(cursor);
   } catch (e) {
     console.error(`Unable to issue find command, ${e}`);
     return { recipesList: [], totalNumRecipess: 0 };
@@ -119,7 +119,7 @@ async function apiPostRecipes(req, res, next) {
   try {
     console.log("inside controller");
     let obj = await postRecipes(req.body);
-    res.status(200).json({obj, msg: "Success"});
+    res.status(201).json({obj, msg: "Success"});
   } catch (err) {
     console.log(err);
     throw new Error.BadRequestError("There is something wrong with the Add Recipe Form")
@@ -133,11 +133,12 @@ async function apiGetRecipes(req, res, next) {
   const page = req.query.page ? parseInt(req.query.page, 10) : 0;
 
   let filters = {};
-  
-  if (req.query.CleanedIngredients) {
+  console.log("Query from FrontEnd", {...req.query});
+  if (req.query.CleanedIngredients && req.query.CleanedIngredients != '""') {
     filters.CleanedIngredients = req.query.CleanedIngredients;
   }
-  if(req.query.Cuisine){
+
+  if(req.query.Cuisine && req.query.Cuisine != '""') {
     filters.Cuisine = req.query.Cuisine;
   }
   if(req.query.totalTime){
