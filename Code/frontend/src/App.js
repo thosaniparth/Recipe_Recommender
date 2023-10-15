@@ -4,6 +4,8 @@ import AddRecipeForm from "./components/AddRecipeForm.js";
 import Header from "./components/Header";
 import recipeDB from "./apis/recipeDB";
 import RecipeList from "./components/RecipeList";
+import RecipeCard from "./components/RecipeCard";
+import styled from 'styled-components';
 import React, { Component } from "react";
 import {
   Route,
@@ -72,42 +74,32 @@ class App extends Component {
       //NoIngredients: noIngredientsInput,
       ingredients: formDict["ingredient"],
       cuisine: formDict["cuisine"],
-      email: formDict["email_id"],
-      flag: formDict["flag"],
       cooking_time: formDict["time_to_cook"],
+      budget: formDict["budget"],
     });
 
-    const mail = formDict["email_id"];
-    const flag = formDict["flag"];
-    const items = Array.from(formDict["ingredient"]);
+    const items = Array.from(formDict["ingredient"]).join(' ');
     const cuis = formDict["cuisine"];
     const cook_time = formDict["time_to_cook"];
-    this.getRecipeDetails(items, cuis, mail, flag, cook_time);
+    const budget = formDict["budget"];
+    this.getRecipeDetails(items, cuis, cook_time, budget);
     //  alert(typeof(ingredientsInput["cuisine"]));
   };
 
   getRecipeDetails = async (
     ingredient,
     cuis,
-    mail,
-    flag,
     cook_time,
-    calories
+    budget,
   ) => {
+    console.log(ingredient, cuis, cook_time, budget);
     try {
-      const response = await recipeDB.get("/recipes", {
-        params: {
-          CleanedIngredients: ingredient,
-          Cuisine: cuis,
-          Email: mail,
-          Flag: flag,
-          totalTime: cook_time,
-          calories: calories,
-        },
-      });
+      const response = await recipeDB.get(`/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`);
       this.setState({
         recipeList: response.data.recipes,
       });
+      console.log(response.data.recipes);
+      console.log(this.state.recipeList);
     } catch (err) {
       console.log(err);
     }
@@ -161,6 +153,19 @@ class App extends Component {
                   */}
 
             {/* <RecipeList recipes={this.state.recipeList} /> */}
+
+            <StyledFlexer>
+                {this.state.recipeList && this.state.recipeList.map((recipe => 
+                    (<RecipeCard 
+                    CleanedIngredients = {recipe.CleanedIngredients}
+                    Cuisine = {recipe.Cuisine}
+                    TotalTimeInMins = {recipe.TotalTimeInMins}
+                    TranslatedInstructions = {recipe.TranslatedInstructions}
+                    TranslatedRecipeName = {recipe.TranslatedRecipeName}
+                    imageUrl = {recipe.imageUrl}
+                    />)
+                ))}
+            </StyledFlexer>
           </Route>
 
           <Route path="/home">
@@ -175,3 +180,11 @@ class App extends Component {
 }
 
 export default App;
+
+const StyledFlexer = styled.div`
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    flex-wrap: wrap;
+`;
