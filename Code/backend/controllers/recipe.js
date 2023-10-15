@@ -23,7 +23,7 @@ async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}
   let query = {};
   console.log("heeere", filters);
   if (filters) {
-    if ("CleanedIngredients" in filters) {
+    if (filters.CleanedIngredients) {
       var str = "(?i)";
       var time = parseInt(filters["totalTime"]);
 
