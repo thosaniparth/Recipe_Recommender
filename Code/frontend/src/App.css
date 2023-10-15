@@ -26,8 +26,8 @@
 body{
   background-image: url('Images/svgs/landing.svg');
   /* background-color: darkgray; */
-  background-repeat: no-repeat;
-  background-size: cover;
+  /* background-repeat: no-repeat; */
+  background-size: contain;
 }
 
 
