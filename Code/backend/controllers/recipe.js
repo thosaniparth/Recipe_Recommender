@@ -34,11 +34,12 @@ async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}
       console.log("the search string",str);
     }
     var time = parseInt(filters["totalTime"]);
+    var budget = parseInt(filters["budget"]);
     if (time) {
       query.TotalTimeInMins = { $lte: time }
     }
-    if (filters["budget"]) {
-        query.budget = {$lte: parseInt(filters["budget"])}
+    if (budget) {
+        query.budget = {$lte: budget}
     } 
     if (filters["typeOfDiet"]){
         query.typeOfDiet = filters["typeOfDiet"];
