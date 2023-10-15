@@ -11,16 +11,16 @@ async function postRecipes(addRecipeDetails) {
   console.log("inside model");
   console.log(typeof Recipe)
   try {
-    const res = Recipe.create(addRecipeDetails);
+    const res = await Recipe.create(addRecipeDetails);
     console.log("1 document inserted");
     console.log(res);
   } catch (error) {
-    Error.CustomAPIError("Document cannot be ineserted: ")
+    console.log("Error in Post Recipes", error);
   }
 }
 
 async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}){
-  let query;
+  let query = {};
   console.log("heeere", filters);
   if (filters) {
     if ("CleanedIngredients" in filters) {
@@ -31,22 +31,22 @@ async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}
         const str1 = filters["CleanedIngredients"][i];
         str += "(?=.*" + str1 + ")";
       }
+      query.CleanedIngredients = { $regex: str }
       console.log(str);
-      if (time) {
-        query = {
-          CleanedIngredients: { $regex: str },
-          TotalTimeInMins: { $lte: time },
-        };
-      } else {
-        query = {
-          CleanedIngredients: { $regex: str },
-        };
-      }
-      if(query.Cuisine){
-        query["Cuisine"] = filters["Cuisine"];
-      }
-      console.log(query);
     }
+    if (time) {
+      query.TotalTimeInMins = { $lte: time }
+    }
+    if (filters["budget"]) {
+        query.budget = {$lte: filters["budget"]}
+    } 
+    if (filters["typeOfDiet"]){
+        query.typeOfDiet = filters["typeOfDiet"];
+    } 
+    if(filters.Cuisine){
+      query["Cuisine"] = filters["Cuisine"];
+    }
+    console.log(query);
   }
 
   let cursor;
@@ -115,38 +115,48 @@ async function getCuisines() {
 
 //*************Recipe Controller******************/
 
-class RecipesController {
-  static async apiPostRecipes(req, res, next) {
-    try {
-      console.log("inside controller");
-      let obj = await postRecipes(req.body);
-      res.json(obj);
-    } catch (err) {
-      console.log("Error in Post Recipes", err);
-    }
+async function apiPostRecipes(req, res, next) {
+  try {
+    console.log("inside controller");
+    let obj = await postRecipes(req.body);
+    res.status(200).json({obj, msg: "Success"});
+  } catch (err) {
+    console.log(err);
+    throw new Error.BadRequestError("There is something wrong with the Add Recipe Form")
   }
+}
 
-  static async apiGetRecipes(req, res, next) {
-    const recipesPerPage = req.query.recipesPerPage
-      ? parseInt(req.query.recipesPerPage, 10)
-      : 20;
-    const page = req.query.page ? parseInt(req.query.page, 10) : 0;
+async function apiGetRecipes(req, res, next) {
+  const recipesPerPage = req.query.recipesPerPage
+    ? parseInt(req.query.recipesPerPage, 10)
+    : 20;
+  const page = req.query.page ? parseInt(req.query.page, 10) : 0;
 
-    let filters = {};
-    //Checking the query to find the required results
-    console.log(req.query.CleanedIngredients);
-    if (req.query.CleanedIngredients) {
-      filters.CleanedIngredients = req.query.CleanedIngredients;
-      filters.Cuisine = req.query.Cuisine;
-      filters.totalTime = req.query.totalTime;
-    }
-
+  let filters = {};
+  
+  if (req.query.CleanedIngredients) {
+    filters.CleanedIngredients = req.query.CleanedIngredients;
+  }
+  if(req.query.Cuisine){
+    filters.Cuisine = req.query.Cuisine;
+  }
+  if(req.query.totalTime){
+    filters.totalTime = req.query.totalTime;
+  }
+  if(req.query.budget){
+    filters.budget = req.query.budget;
+  }
+  if(req.query.typeOfDiet){
+    filters.typeOfDiet = req.query.typeOfDiet;
+  }
+  
+  try {
     const { recipesList, totalNumRecipes} =
-      await getRecipes({
-        filters,
-        page,
-        recipesPerPage,
-      });
+    await getRecipes({
+      filters,
+      page,
+      recipesPerPage,
+    });
 
     let response = {
       recipes: recipesList,
@@ -155,17 +165,28 @@ class RecipesController {
       entries_per_page: recipesPerPage,
       total_results: totalNumRecipes,
     };
-    res.json(response);
+    return res.status(200).json({response, msg:"Success"});
+  } catch (error) {
+    console.log(error);
+    throw new Error.BadRequestError("There was error processing your queries. Please try again");
   }
-  //Function to get the cuisines
-  static async apiGetRecipeCuisines(req, res, next) {
-    try {
-      let cuisines = await getCuisines();
-      console.log(cuisines);
-    } catch (e) {
-      throw new Error.CustomAPIError(`Get Cusines API Error: ${e}`)
-    }
+    
+}
+
+//Function to get the cuisines
+async function apiGetRecipeCuisines(req, res, next) {
+  try {
+    let cuisines = await getCuisines();
+    console.log(cuisines);
+    return res.status(200).json({cuisines, msg:"Success"});
+  } catch (e) {
+    console.log(e);
+    throw new Error.BadRequestError(`Something went wrong. Please try again`)
   }
 }
 
-module.exports = RecipesController
+module.exports = {
+  apiGetRecipes,
+  apiPostRecipes,
+  apiGetRecipeCuisines
+}
