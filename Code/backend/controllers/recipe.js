@@ -20,7 +20,7 @@ async function postRecipes(addRecipeDetails) {
 }
 
 async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}){
-  let query;
+  let query = {};
   console.log("heeere", filters);
   if (filters) {
     if ("CleanedIngredients" in filters) {
@@ -31,22 +31,22 @@ async function getRecipes({ filters = null, page = 0, recipesPerPage = 10,} = {}
         const str1 = filters["CleanedIngredients"][i];
         str += "(?=.*" + str1 + ")";
       }
+      query.CleanedIngredients = { $regex: str }
       console.log(str);
-      if (time) {
-        query = {
-          CleanedIngredients: { $regex: str },
-          TotalTimeInMins: { $lte: time },
-        };
-      } else {
-        query = {
-          CleanedIngredients: { $regex: str },
-        };
-      }
-      if(query.Cuisine){
-        query["Cuisine"] = filters["Cuisine"];
-      }
-      console.log(query);
     }
+    if (time) {
+      query.TotalTimeInMins = { $lte: time }
+    }
+    if (filters["budget"]) {
+        query.budget = {$lte: filters["budget"]}
+    } 
+    if (filters["typeOfDiet"]){
+        query.typeOfDiet = filters["typeOfDiet"];
+    } 
+    if(filters.Cuisine){
+      query["Cuisine"] = filters["Cuisine"];
+    }
+    console.log(query);
   }
 
   let cursor;
@@ -133,13 +133,23 @@ async function apiGetRecipes(req, res, next) {
   const page = req.query.page ? parseInt(req.query.page, 10) : 0;
 
   let filters = {};
-  //Checking the query to find the required results
-  console.log(req.query.CleanedIngredients);
+  
   if (req.query.CleanedIngredients) {
     filters.CleanedIngredients = req.query.CleanedIngredients;
+  }
+  if(req.query.Cuisine){
     filters.Cuisine = req.query.Cuisine;
+  }
+  if(req.query.totalTime){
     filters.totalTime = req.query.totalTime;
   }
+  if(req.query.budget){
+    filters.budget = req.query.budget;
+  }
+  if(req.query.typeOfDiet){
+    filters.typeOfDiet = req.query.typeOfDiet;
+  }
+  
   try {
     const { recipesList, totalNumRecipes} =
     await getRecipes({
