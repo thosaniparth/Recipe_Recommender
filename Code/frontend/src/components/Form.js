@@ -66,6 +66,11 @@ class Form extends Component {
   addHandler = (event) => {
     const ingredient = document.getElementById("ingredient").value;
 
+    if (ingredient.trim() === "") {
+      alert("Ingredient cannot be empty");
+      return;
+    }
+
     this.setState(
       {
         //cuisine : this.state.cuisine,
