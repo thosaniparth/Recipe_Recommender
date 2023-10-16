@@ -113,6 +113,11 @@ class Form extends Component {
       return;
     }
 
+    if (isNaN(time) || time <= 0) {
+      alert("Time to cook should be a positive number");
+      return;
+    }
+
     const response = await recipeDB
       .get(`/recipes?CleanedIngredients=${this.state.ingredients}&Cuisine=${this.state.ingredients}&budget=${budget}&TotalTimeInMins=${time}`)
       .catch((err) => {
