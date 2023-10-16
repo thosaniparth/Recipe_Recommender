@@ -108,6 +108,11 @@ class Form extends Component {
     const budget = document.getElementById("budget").value;
     const time = document.getElementById("time_to_cook").value
 
+    if (isNaN(budget) || budget <= 0) {
+      alert("Budget should be a positive number");
+      return;
+    }
+
     const response = await recipeDB
       .get(`/recipes?CleanedIngredients=${this.state.ingredients}&Cuisine=${this.state.ingredients}&budget=${budget}&TotalTimeInMins=${time}`)
       .catch((err) => {
