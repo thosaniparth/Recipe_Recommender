@@ -144,109 +144,95 @@ class Form extends Component {
     dict["ingredient"] = this.state.ingredients;
     dict["cuisine"] = document.getElementById("cuisine").value;
     dict["time_to_cook"] = document.getElementById("time_to_cook").value;
-    console.log("dict value", dict["time_to_cook"]);
+    dict["budget"] = document.getElementById("budget").value;
+    dict["time_to_cook"] = document.getElementById("time_to_cook").value
+    
+    console.log(dict);
     
     this.props.sendFormData(dict);
     document.getElementById("cuisine").value = "";
     document.getElementById("time_to_cook").value = "";
 
-    this.searchRecipe();
+    // this.searchRecipe();
   };
 
   // render function dispays the UI content i.e the form content
   render() {
     // returns jsx element
     return (
-      <div>
-        <div class="formOutercontainer">
-          <form onSubmit={this.handleSubmit}>
-            <div class="add-a-recipe">Search a Recipe</div>
-            <div className="row pb-1">
-              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-                <label class="sideLabel-new"> Ingredient: </label> 
-                <div>
-                  <div className="input-group-append form-input">
-                    <input type="text" id="ingredient" />
-                  </div>
-                  </div>
-              </div>
+      <div class="formOutercontainer">
+        <form onSubmit={this.handleSubmit}>
+          <div class="add-a-recipe">Search a Recipe</div>
+          <div className="row pb-1">
+            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+              <label class="sideLabel-new"> Ingredient: </label> 
               <div>
-                    <button onClick={this.addHandler} type="button" id="addButton">
-                      Add item
+                <div className="input-group-append form-input">
+                  <input type="text" id="ingredient" />
+                </div>
+                </div>
+            </div>
+            <div>
+                  <button onClick={this.addHandler} type="button" id="addButton">
+                    Add item
+                  </button>
+                </div>
+          </div>
+
+          <div className="row pb-1">
+            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+              <label class="sideLabel-new"> Cuisine: </label> <br />
+              <div className="input-group-append form-input">
+                <input type="text" id="cuisine" />
+              </div>
+            </div>
+          </div>
+
+          <div className="row pb-1">
+            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+              <label class="sideLabel-new"> Budget: </label> <br />
+              <div className="input-group-append form-input">
+                <input type="text" id="budget" />
+              </div>
+            </div>
+          </div>
+
+          <div className="row pb-1">
+            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+              <label class="sideLabel-new">Time to cook:</label> <br />
+              <select name="time_to_cook" id="time_to_cook" className="form-input">
+                <option value="15">15</option>
+                <option value="30">30</option>
+                <option value="45">45</option>
+                <option value="60">60</option>
+              </select>
+            </div>
+          </div>
+          <div className="row pb-1">
+            <div className="input-group col-lg-4 bg-danger text-white flexer-new">
+              <div className="input-group-append form-input">
+                <div className="row pb-1">
+                  <div className="input-group col-lg-4 flexer-new">
+                    <label class="sideLabel-new">Added Items:</label>
+                    {this.printHander()}
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="row pb-1">
+                  <div className="input-group col-lg-4">
+                    <button
+                      type="button"
+                      id="submit"
+                      onClick={this.handleSubmit}
+                    >
+                      Search Recipes
                     </button>
                   </div>
-            </div>
-
-            <div className="row pb-1">
-              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-                <label class="sideLabel-new"> Cuisine: </label> <br />
-                <div className="input-group-append form-input">
-                  <input type="text" id="cuisine" />
                 </div>
-              </div>
-            </div>
-
-            <div className="row pb-1">
-              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-                <label class="sideLabel-new"> Budget: </label> <br />
-                <div className="input-group-append form-input">
-                  <input type="text" id="budget" />
-                </div>
-              </div>
-            </div>
-
-            <div className="row pb-1">
-              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-                <label class="sideLabel-new">Time to cook:</label> <br />
-                <select name="time_to_cook" id="time_to_cook" className="form-input">
-                  <option value="15">15</option>
-                  <option value="30">30</option>
-                  <option value="45">45</option>
-                  <option value="60">60</option>
-                </select>
-              </div>
-            </div>
-            <div className="row pb-1">
-              <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-                <div className="input-group-append form-input">
-                  <div className="row pb-1">
-                    <div className="input-group col-lg-4 flexer-new">
-                      <label class="sideLabel-new">Added Items:</label>
-                      {this.printHander()}
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-            
-            <div className="row pb-1">
-                    <div className="input-group col-lg-4">
-                      <button
-                        type="button"
-                        id="submit"
-                        onClick={this.handleSubmit}
-                      >
-                        Search Recipes
-                      </button>
-                    </div>
-                  </div>
-          </form>
-        </div>
-
-        <div>
-        <StyledFlexer>
-            {this.state.recipes.map((recipe => 
-                (<RecipeCard 
-                CleanedIngredients = {recipe.CleanedIngredients}
-                Cuisine = {recipe.Cuisine}
-                TotalTimeInMins = {recipe.TotalTimeInMins}
-                TranslatedInstructions = {recipe.TranslatedInstructions}
-                TranslatedRecipeName = {recipe.TranslatedRecipeName}
-                imageUrl = {recipe.imageUrl}
-                />)
-            ))}
-        </StyledFlexer>
-        </div>
+        </form>
       </div>
     );
   }
@@ -259,21 +245,4 @@ const StyledHeader = styled.div`
     text-align: center;
     margin: 22px auto;
     font-weight: 800;
-`;
-
-const StyledCenterFlexer = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    margin: auto;
-    text-align: center;
-`;
-
-const StyledFlexer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
 `;
