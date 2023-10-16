@@ -139,6 +139,11 @@ class Form extends Component {
       () => console.log(this.state)
     );
 
+    if (this.state.cuisine.trim() === "") {
+      alert("Cuisine cannot be empty");
+      return;
+    }
+
     event.preventDefault();
     var dict = {};
     dict["ingredient"] = this.state.ingredients;
