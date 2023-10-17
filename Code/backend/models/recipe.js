@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
+const mongoose_fuzzy = require("mongoose-fuzzy-searching");
 
 const recipeSchema = new Schema(
   {
@@ -41,6 +42,11 @@ const recipeSchema = new Schema(
   },
   { collection: "recipe" },
 );
+/**
+* Adds a fuzzy searching plugin for Ingredients and Cuisine.
+* @readonly
+*/
+recipeSchema.plugin(mongoose_fuzzy, { fields: ["CleanedIngredients", "Cuisine"] });
 const Recipe = mongoose.model("Recipe", recipeSchema);
 
 module.exports = Recipe;
