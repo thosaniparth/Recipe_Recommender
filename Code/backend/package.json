@@ -8,9 +8,9 @@
     "test": "mocha",
     "start": "node app.js",
     "server": "nodemon app.js",
-    "lint": "eslint 'dao/**.js'",
-    "format": "prettier --check ./dao",
-    "format:fix": "prettier --write ./dao"
+    "lint": "eslint 'controllers/**.js'",
+    "format": "prettier --check ./controllers",
+    "format:fix": "prettier --write ./controllers"
   },
   "keywords": [],
   "author": "",
