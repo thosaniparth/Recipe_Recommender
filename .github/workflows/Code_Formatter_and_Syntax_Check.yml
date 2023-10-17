@@ -1,11 +1,9 @@
 name: Code Formatter and Syntax Check
 on:
   pull_request:
-    branches:
-      - master
+    branches: ["master"]
   push:
-    branches:
-      - master
+    branches: ["master"]
 jobs:
   test:
     name: Check the source code
@@ -19,4 +17,4 @@ jobs:
       - name: Lint
         run: |
             cd Code/backend
-            npx eslint ./dao
+            npx eslint ./controllers
