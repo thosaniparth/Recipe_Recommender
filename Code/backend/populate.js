@@ -1,8 +1,7 @@
-require('dotenv').config();
-const connectDB = require('./config/db');
-const Recipe = require('./models/recipe');
-const mockData = require('./output.json');
-
+require("dotenv").config();
+const connectDB = require("./config/db");
+const Recipe = require("./models/recipe");
+const mockData = require("./output.json");
 
 const populating = async () => {
   await connectDB();
@@ -12,5 +11,5 @@ const populating = async () => {
   } catch (error) {
     console.log(error, "Something went wrong");
   }
-}
-populating()
+};
+populating();

@@ -5,7 +5,7 @@ import Header from "./components/Header";
 import recipeDB from "./apis/recipeDB";
 import RecipeList from "./components/RecipeList";
 import RecipeCard from "./components/RecipeCard";
-import styled from 'styled-components';
+import styled from "styled-components";
 import React, { Component } from "react";
 import {
   Route,
@@ -58,7 +58,7 @@ class App extends Component {
       console.log("inside app.js", addRecipeDetails);
       const response = await recipeDB.post(
         "recipes/Addrecipes",
-        addRecipeDetails
+        addRecipeDetails,
       );
       // this.setState({
       //   recipeList: response.data.recipes,
@@ -78,7 +78,7 @@ class App extends Component {
       budget: formDict["budget"],
     });
 
-    const items = Array.from(formDict["ingredient"]).join(' ');
+    const items = Array.from(formDict["ingredient"]).join(" ");
     const cuis = formDict["cuisine"];
     const cook_time = formDict["time_to_cook"];
     const budget = formDict["budget"];
@@ -86,15 +86,12 @@ class App extends Component {
     //  alert(typeof(ingredientsInput["cuisine"]));
   };
 
-  getRecipeDetails = async (
-    ingredient,
-    cuis,
-    cook_time,
-    budget,
-  ) => {
+  getRecipeDetails = async (ingredient, cuis, cook_time, budget) => {
     console.log(ingredient, cuis, cook_time, budget);
     try {
-      const response = await recipeDB.get(`/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`);
+      const response = await recipeDB.get(
+        `/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`,
+      );
       this.setState({
         recipeList: response.data.recipes,
       });
@@ -136,9 +133,7 @@ class App extends Component {
             setLoginFlag={this.setLoginFlag}
           />
 
-          <Route 
-            path="/add-recipe"
-          >
+          <Route path="/add-recipe">
             <Header loginFlag={this.state.loginFlag} />
             <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} />
           </Route>
@@ -155,15 +150,16 @@ class App extends Component {
             {/* <RecipeList recipes={this.state.recipeList} /> */}
 
             <StyledFlexer>
-                {this.state.recipeList && this.state.recipeList.map((recipe => 
-                    (<RecipeCard 
-                    CleanedIngredients = {recipe.CleanedIngredients}
-                    Cuisine = {recipe.Cuisine}
-                    TotalTimeInMins = {recipe.TotalTimeInMins}
-                    TranslatedInstructions = {recipe.TranslatedInstructions}
-                    TranslatedRecipeName = {recipe.TranslatedRecipeName}
-                    imageUrl = {recipe.imageUrl}
-                    />)
+              {this.state.recipeList &&
+                this.state.recipeList.map((recipe) => (
+                  <RecipeCard
+                    CleanedIngredients={recipe.CleanedIngredients}
+                    Cuisine={recipe.Cuisine}
+                    TotalTimeInMins={recipe.TotalTimeInMins}
+                    TranslatedInstructions={recipe.TranslatedInstructions}
+                    TranslatedRecipeName={recipe.TranslatedRecipeName}
+                    imageUrl={recipe.imageUrl}
+                  />
                 ))}
             </StyledFlexer>
           </Route>
@@ -182,9 +178,9 @@ class App extends Component {
 export default App;
 
 const StyledFlexer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
 `;
