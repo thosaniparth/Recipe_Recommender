@@ -66,6 +66,11 @@ class Form extends Component {
   addHandler = (event) => {
     const ingredient = document.getElementById("ingredient").value;
 
+    if (ingredient.trim() === "") {
+      alert("Ingredient cannot be empty");
+      return;
+    }
+
     this.setState(
       {
         //cuisine : this.state.cuisine,
@@ -103,6 +108,16 @@ class Form extends Component {
     const budget = document.getElementById("budget").value;
     const time = document.getElementById("time_to_cook").value
 
+    if (isNaN(budget) || budget <= 0) {
+      alert("Budget should be a positive number");
+      return;
+    }
+
+    if (isNaN(time) || time <= 0) {
+      alert("Time to cook should be a positive number");
+      return;
+    }
+
     const response = await recipeDB
       .get(`/recipes?CleanedIngredients=${this.state.ingredients}&Cuisine=${this.state.ingredients}&budget=${budget}&TotalTimeInMins=${time}`)
       .catch((err) => {
@@ -133,6 +148,11 @@ class Form extends Component {
       },
       () => console.log(this.state)
     );
+
+    if (this.state.cuisine.trim() === "") {
+      alert("Cuisine cannot be empty");
+      return;
+    }
 
     event.preventDefault();
     var dict = {};
