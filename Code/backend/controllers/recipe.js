@@ -179,7 +179,7 @@ async function apiGetRecipes(req, res, next) {
 async function apiGetRecipeCuisines(req, res, next) {
   try {
     let cuisines = await getCuisines();
-    console.log(cuisines);
+    // console.log(cuisines);
     return res.status(200).json({cuisines, msg:"Success"});
   } catch (e) {
     console.log(e);
