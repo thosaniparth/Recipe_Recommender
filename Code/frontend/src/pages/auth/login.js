@@ -3,8 +3,8 @@ import recipeDB from "../../apis/recipeDB";
 import { Redirect, withRouter } from "react-router";
 import "./login.css";
 import Header from "../../components/Header";
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 // import '../../node_modules/bootstrap/dist/css/bootstrap.css'
 
 function loginForm(props) {
@@ -34,21 +34,16 @@ function loginForm(props) {
       username: state.username,
       password: state.password,
     };
-    const response = await recipeDB
-      .post("/signIn", stateTemp)
-      .catch((err) => {
-        console.log(err, err.message);
-      });
+    const response = await recipeDB.post("/signIn", stateTemp).catch((err) => {
+      console.log(err, err.message);
+    });
     if (response) {
       setState((prevState) => ({
         ...prevState,
         successMessage: "Login successful. Redirecting to home page..",
         failMessage: null,
       }));
-      sessionStorage.setItem(
-        "login_recipe_recommender",
-        state.username
-      );
+      sessionStorage.setItem("login_recipe_recommender", state.username);
       props.setLoginFlag;
       props.history.push("/home");
     } else {
@@ -62,10 +57,10 @@ function loginForm(props) {
 
   return (
     <MainContainer>
-      <div id="parent" style={{ height: '100%' }}>
+      <div id="parent" style={{ height: "100%" }}>
         <StyledForm id="form_login">
           <div>
-          <StlyedH1>SIGN IN</StlyedH1>
+            <StlyedH1>SIGN IN</StlyedH1>
             <label>Username</label>
             <input
               type="text"
@@ -101,7 +96,12 @@ function loginForm(props) {
             <div style={{ color: "red" }}>{state.failMessage}</div>
           ) : null}
 
-          <i><StyledLink onClick={() => history.push("/sign-up")}>Sign-Up</StyledLink> instead!</i>
+          <i>
+            <StyledLink onClick={() => history.push("/sign-up")}>
+              Sign-Up
+            </StyledLink>{" "}
+            instead!
+          </i>
         </StyledForm>
       </div>
     </MainContainer>

@@ -1,39 +1,29 @@
-const express = require('express');
+const express = require("express");
 const signInRouter = express.Router();
 const signUpRouter = express.Router();
 const signOutRouter = express.Router();
 const userProfileRouter = express.Router();
 
 const {
-    signInGet,
-    signUpGet,
-    signInPost,
-    signUpPost,
-    signOutGet,
-    userProfileGet,
+  signInGet,
+  signUpGet,
+  signInPost,
+  signUpPost,
+  signOutGet,
+  userProfileGet,
 } = require("../controllers/user");
 
-signInRouter
-    .route("/")
-    .get(signInGet)
-    .post(signInPost)
+signInRouter.route("/").get(signInGet).post(signInPost);
 
-signUpRouter
-    .route("/")
-    .get(signUpGet)
-    .post(signUpPost)
+signUpRouter.route("/").get(signUpGet).post(signUpPost);
 
-signOutRouter
-    .route("/")
-    .get(signOutGet)
+signOutRouter.route("/").get(signOutGet);
 
-userProfileRouter
-    .route("/")
-    .get(userProfileGet)
+userProfileRouter.route("/").get(userProfileGet);
 
 module.exports = {
-    signInRouter,
-    signUpRouter,
-    signOutRouter,
-    userProfileRouter,
-}
+  signInRouter,
+  signUpRouter,
+  signOutRouter,
+  userProfileRouter,
+};

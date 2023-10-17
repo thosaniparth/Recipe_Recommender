@@ -1,7 +1,7 @@
 import React, { Component } from "react";
-import { useHistory } from 'react-router-dom';
+import { useHistory } from "react-router-dom";
 import recipeDB from "../apis/recipeDB";
-import styled from 'styled-components';
+import styled from "styled-components";
 import RecipeCard from "./RecipeCard";
 
 // Form component to maintain input form
@@ -17,7 +17,7 @@ class Form extends Component {
       ingredients: new Set(),
       cuisineState: 0,
       cuisine: "",
-      recipes: []
+      recipes: [],
     };
   }
 
@@ -52,7 +52,12 @@ class Form extends Component {
 
     // mapping each item to be displayed as a list item
     const list_items = items.map((item) => (
-      <div onMouseDown={this.removeHandler} id={item} class="addedIngredient items-returned" style={{ flexWrap: 'wrap' }}>
+      <div
+        onMouseDown={this.removeHandler}
+        id={item}
+        class="addedIngredient items-returned"
+        style={{ flexWrap: "wrap" }}
+      >
         {" "}
         {item}
       </div>
@@ -77,7 +82,7 @@ class Form extends Component {
         //numberIngredients : this.state.numberIngredients,
         ingredients: new Set(this.state.ingredients).add(ingredient),
       },
-      () => console.log(this.state)
+      () => console.log(this.state),
     );
 
     document.getElementById("ingredient").value = "";
@@ -97,7 +102,7 @@ class Form extends Component {
         //numberIngredients : this.state.numberIngredients,
         ingredients: ingredientList,
       },
-      () => console.log(this.state)
+      () => console.log(this.state),
     );
   };
 
@@ -106,7 +111,7 @@ class Form extends Component {
 
   searchRecipe = async () => {
     const budget = document.getElementById("budget").value;
-    const time = document.getElementById("time_to_cook").value
+    const time = document.getElementById("time_to_cook").value;
 
     if (isNaN(budget) || budget <= 0) {
       alert("Budget should be a positive number");
@@ -119,7 +124,9 @@ class Form extends Component {
     }
 
     const response = await recipeDB
-      .get(`/recipes?CleanedIngredients=${this.state.ingredients}&Cuisine=${this.state.ingredients}&budget=${budget}&TotalTimeInMins=${time}`)
+      .get(
+        `/recipes?CleanedIngredients=${this.state.ingredients}&Cuisine=${this.state.ingredients}&budget=${budget}&TotalTimeInMins=${time}`,
+      )
       .catch((err) => {
         console.log(err, err.message);
       });
@@ -131,22 +138,19 @@ class Form extends Component {
         ingredients: new Set(),
         cuisineState: 0,
         cuisine: "",
-        recipes: response.data.recipes
+        recipes: response.data.recipes,
       });
     } else {
-      console.log("Failed...")
+      console.log("Failed...");
     }
   };
 
-  
-
   handleSubmit = (event) => {
-
     this.setState(
       {
         cuisine: document.getElementById("cuisine").value,
       },
-      () => console.log(this.state)
+      () => console.log(this.state),
     );
 
     if (this.state.cuisine.trim() === "") {
@@ -160,10 +164,10 @@ class Form extends Component {
     dict["cuisine"] = document.getElementById("cuisine").value;
     dict["time_to_cook"] = document.getElementById("time_to_cook").value;
     dict["budget"] = document.getElementById("budget").value;
-    dict["time_to_cook"] = document.getElementById("time_to_cook").value
-    
+    dict["time_to_cook"] = document.getElementById("time_to_cook").value;
+
     console.log(dict);
-    
+
     this.props.sendFormData(dict);
     document.getElementById("cuisine").value = "";
     document.getElementById("time_to_cook").value = "";
@@ -180,18 +184,18 @@ class Form extends Component {
           <div class="add-a-recipe">Search a Recipe</div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new"> Ingredient: </label> 
+              <label class="sideLabel-new"> Ingredient: </label>
               <div>
                 <div className="input-group-append form-input">
                   <input type="text" id="ingredient" />
                 </div>
-                </div>
+              </div>
             </div>
             <div>
-                  <button onClick={this.addHandler} type="button" id="addButton">
-                    Add item
-                  </button>
-                </div>
+              <button onClick={this.addHandler} type="button" id="addButton">
+                Add item
+              </button>
+            </div>
           </div>
 
           <div className="row pb-1">
@@ -215,7 +219,11 @@ class Form extends Component {
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
               <label class="sideLabel-new">Time to cook:</label> <br />
-              <select name="time_to_cook" id="time_to_cook" className="form-input">
+              <select
+                name="time_to_cook"
+                id="time_to_cook"
+                className="form-input"
+              >
                 <option value="15">15</option>
                 <option value="30">30</option>
                 <option value="45">45</option>
@@ -235,18 +243,14 @@ class Form extends Component {
               </div>
             </div>
           </div>
-          
+
           <div className="row pb-1">
-                  <div className="input-group col-lg-4">
-                    <button
-                      type="button"
-                      id="submit"
-                      onClick={this.handleSubmit}
-                    >
-                      Search Recipes
-                    </button>
-                  </div>
-                </div>
+            <div className="input-group col-lg-4">
+              <button type="button" id="submit" onClick={this.handleSubmit}>
+                Search Recipes
+              </button>
+            </div>
+          </div>
         </form>
       </div>
     );
@@ -256,8 +260,8 @@ class Form extends Component {
 export default Form;
 
 const StyledHeader = styled.div`
-    font-size: 32px;
-    text-align: center;
-    margin: 22px auto;
-    font-weight: 800;
+  font-size: 32px;
+  text-align: center;
+  margin: 22px auto;
+  font-weight: 800;
 `;
