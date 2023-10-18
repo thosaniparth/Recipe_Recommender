@@ -1,13 +1,13 @@
 import React, { Component } from "react";
-import { Redirect } from 'react-router-dom';
+import { Redirect } from "react-router-dom";
 import recipeDB from "../apis/recipeDB";
-import styled from 'styled-components';
+import styled from "styled-components";
 
 // Form component to maintain input form
 class Form extends Component {
   // constructor for Form Component
   // We maintain user input as a state object
-  
+
   constructor() {
     super();
 
@@ -18,7 +18,7 @@ class Form extends Component {
       cuisineState: 0,
       cuisine: "",
       error: false,
-      redirect: false
+      redirect: false,
     };
   }
   // function to send the data to the parent App component
@@ -31,24 +31,24 @@ class Form extends Component {
     dict["recipe_ingredients"] =
       document.getElementById("recipe_ingredients").value;
     dict["recipe_instructions"] = document.getElementById(
-      "recipe_instructions"
+      "recipe_instructions",
     ).value;
     dict["recipe_time"] = document.getElementById("recipe_time").value;
     dict["recipe_url"] = document.getElementById("recipe_url").value;
     dict["recipe_budget"] = document.getElementById("recipe_budget").value;
     console.log(dict);
 
-    let all_val_filled = []
+    let all_val_filled = [];
     Object.keys(dict).map((key, value) => {
       console.log(key, dict[key]);
-      if (dict[key] != ""){
-        all_val_filled.push(key)
-      } 
-    })
+      if (dict[key] != "") {
+        all_val_filled.push(key);
+      }
+    });
 
     // this.props.sendRecipeFormData(dict);
     console.log(all_val_filled);
-    if(all_val_filled.length == 6){
+    if (all_val_filled.length == 6) {
       this.submitToApi(dict);
       this.setState({
         // cuisine : "Any",
@@ -57,7 +57,7 @@ class Form extends Component {
         cuisineState: 0,
         cuisine: "",
         redirect: true,
-        error: true
+        error: true,
       });
     } else {
       this.setState({
@@ -67,7 +67,7 @@ class Form extends Component {
         cuisineState: 0,
         cuisine: "",
         redirect: false,
-        error: true
+        error: true,
       });
     }
   };
@@ -79,14 +79,14 @@ class Form extends Component {
         console.log(err, err.message);
       });
     if (response) {
-      console.log("Added...")
+      console.log("Added...");
     } else {
-      console.log("Failed...")
+      console.log("Failed...");
     }
   };
 
   renderRedirect = () => {
-    return <Redirect to='/home' />
+    return <Redirect to="/home" />;
   };
 
   // render function dispays the UI content i.e the form content
@@ -99,12 +99,14 @@ class Form extends Component {
       <div class="formOutercontainer">
         <form onSubmit={this.handleRecipeSubmit} required>
           <div class="add-a-recipe">Add a Recipe</div>
-          {this.state.error && <StyledError>Kindly fill all the fields.</StyledError>}
+          {this.state.error && (
+            <StyledError>Kindly fill all the fields.</StyledError>
+          )}
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Name: </label> 
+              <label class="sideLabel"> Recipe Name: </label>
               <div className="input-group-append">
-                <input type="text" id="recipe_name" required={true}/>
+                <input type="text" id="recipe_name" required={true} />
               </div>
             </div>
           </div>
@@ -113,7 +115,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Ingredients: </label> <br />
               <div className="input-group-append">
-                <input type="textarea" id="recipe_ingredients" required/>
+                <input type="textarea" id="recipe_ingredients" required />
               </div>
             </div>
           </div>
@@ -122,7 +124,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Instructions: </label> <br />
               <div className="input-group-append">
-                <input type="text" id="recipe_instructions" required/>
+                <input type="text" id="recipe_instructions" required />
               </div>
             </div>
           </div>
@@ -131,7 +133,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Budget: </label> <br />
               <div className="input-group-append">
-                <input type="text" id="recipe_budget" required/>
+                <input type="text" id="recipe_budget" required />
               </div>
             </div>
           </div>
@@ -140,15 +142,20 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger flexer">
               <label class="sideLabel"> Recipe Cuisine: </label> <br />
               <div className="input-group-append">
-                <input type="text" id="recipe_cuisine" required/>
+                <input type="text" id="recipe_cuisine" required />
               </div>
             </div>
           </div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Time: </label> 
-              <div className="input-group-append" style={{ width: '66%' }}>
-                <select name="time_to_cook" id="recipe_time" className="form-input" style={{ width: '100%' }}>
+              <label class="sideLabel"> Recipe Time: </label>
+              <div className="input-group-append" style={{ width: "66%" }}>
+                <select
+                  name="time_to_cook"
+                  id="recipe_time"
+                  className="form-input"
+                  style={{ width: "100%" }}
+                >
                   <option value="15">15</option>
                   <option value="30">30</option>
                   <option value="45">45</option>

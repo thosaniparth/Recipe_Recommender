@@ -1,17 +1,15 @@
 name: Code Formatter and Syntax Check
 on:
   pull_request:
-    branches:
-      - master
+    branches: ["master"]
   push:
-    branches:
-      - master
+    branches: ["master"]
 jobs:
   test:
     name: Check the source code
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v2
+      - uses: actions/checkout@v3
       - name: Install packages
         run: |
             cd Code/backend
@@ -19,4 +17,4 @@ jobs:
       - name: Lint
         run: |
             cd Code/backend
-            npx eslint ./dao
+            npx eslint ./controllers
