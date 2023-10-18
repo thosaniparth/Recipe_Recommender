@@ -67,7 +67,10 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 
 ### Installation:
 
-- clone repository using `git clone https://github.com/PvPatel-1001/Recipe_Recommender.git`
+- clone repository-
+```
+ git clone https://github.com/Shubh-Nisar/Recipe_Recommender.git
+ ```
 - setup for frontend
   open terminal and navigate to the **frontend** folder and execute the following:
   ```
