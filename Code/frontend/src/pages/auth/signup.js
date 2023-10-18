@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import recipeDB from "../../apis/recipeDB";
 import { Redirect, withRouter } from "react-router";
 import "./login.css";
-import styled from 'styled-components';
-import { useHistory } from 'react-router-dom';
+import styled from "styled-components";
+import { useHistory } from "react-router-dom";
 // import '../../node_modules/bootstrap/dist/css/bootstrap.css'
 
 function signupForm(props) {
@@ -33,21 +33,16 @@ function signupForm(props) {
       username: state.username,
       password: state.password,
     };
-    const response = await recipeDB
-      .post("/signUp", stateTemp)
-      .catch((err) => {
-        console.log(err, err.message);
-      });
+    const response = await recipeDB.post("/signUp", stateTemp).catch((err) => {
+      console.log(err, err.message);
+    });
     if (response) {
       setState((prevState) => ({
         ...prevState,
         successMessage: "Sign Up successful. Redirecting to home page..",
         failMessage: null,
       }));
-      sessionStorage.setItem(
-        "login_recipe_recommender",
-        state.username
-      );
+      sessionStorage.setItem("login_recipe_recommender", state.username);
       props.setLoginFlag;
       props.history.push("/login");
     } else {
@@ -61,10 +56,10 @@ function signupForm(props) {
 
   return (
     <MainContainer>
-      <div id="parent" style={{ height: '100%' }}>
+      <div id="parent" style={{ height: "100%" }}>
         <StyledForm id="form_login">
           <div>
-          <StlyedH1>SIGN UP</StlyedH1>
+            <StlyedH1>SIGN UP</StlyedH1>
             <label>Username</label>
             <input
               type="text"
@@ -100,7 +95,12 @@ function signupForm(props) {
             <div style={{ color: "red" }}>{state.failMessage}</div>
           ) : null}
 
-          <i><StyledLink onClick={() => history.push("/login")}>Sign-In</StyledLink> instead!</i>
+          <i>
+            <StyledLink onClick={() => history.push("/login")}>
+              Sign-In
+            </StyledLink>{" "}
+            instead!
+          </i>
         </StyledForm>
       </div>
     </MainContainer>

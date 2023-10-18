@@ -4,7 +4,7 @@ import AddRecipeForm from "./components/AddRecipeForm.js";
 import Header from "./components/Header";
 import recipeDB from "./apis/recipeDB";
 import RecipeCard from "./components/RecipeCard";
-import styled from 'styled-components';
+import styled from "styled-components";
 import React, { Component } from "react";
 import {
   Route,
@@ -57,7 +57,7 @@ class App extends Component {
       console.log("inside app.js", addRecipeDetails);
       const response = await recipeDB.post(
         "recipes/Addrecipes",
-        addRecipeDetails
+        addRecipeDetails,
       );
       // this.setState({
       //   recipeList: response.data.recipes,
@@ -77,7 +77,7 @@ class App extends Component {
       budget: formDict["budget"],
     });
 
-    const items = Array.from(formDict["ingredient"]).join(' ');
+    const items = Array.from(formDict["ingredient"]).join(" ");
     const cuis = formDict["cuisine"];
     const cook_time = formDict["time_to_cook"];
     const budget = formDict["budget"];
@@ -85,12 +85,7 @@ class App extends Component {
     //  alert(typeof(ingredientsInput["cuisine"]));
   };
 
-  getRecipeDetails = async (
-    ingredient,
-    cuis,
-    cook_time,
-    budget,
-  ) => {
+  getRecipeDetails = async (ingredient, cuis, cook_time, budget) => {
     console.log(ingredient, cuis, cook_time, budget);
     try {
       const response = await recipeDB.get(`/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`).catch((err) => {
@@ -137,9 +132,7 @@ class App extends Component {
             setLoginFlag={this.setLoginFlag}
           />
 
-          <Route 
-            path="/add-recipe"
-          >
+          <Route path="/add-recipe">
             <Header loginFlag={this.state.loginFlag} />
             <AddRecipeForm sendRecipeFormData={this.handleRecipeSubmit} />
           </Route>
