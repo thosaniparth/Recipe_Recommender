@@ -249,7 +249,9 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 - [x] Updated email format of the recipe results.
 - [x] Fine tune the existing code and wrap up to produce a finished product.
 - [x] Demo video showing deltas from phase-2 to phase-3. -->
+
 ### Phase 4:
+
 - [x] Refurbished the backend code by cleaning the code
 - [x] Built proper database schema and models
 - [x] Developed codes for controllers and routes
@@ -271,8 +273,6 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 - [x] Use of functional components and ES6 format over the older class-based ES5 syntax
 - [x] Use of react hooks and arrow functions
 - [x] Styling using styled-components
-
-
 
 Regenerate
 
