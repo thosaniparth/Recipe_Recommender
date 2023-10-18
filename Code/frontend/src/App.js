@@ -3,7 +3,6 @@ import Form from "./components/Form.js";
 import AddRecipeForm from "./components/AddRecipeForm.js";
 import Header from "./components/Header";
 import recipeDB from "./apis/recipeDB";
-import RecipeList from "./components/RecipeList";
 import RecipeCard from "./components/RecipeCard";
 import styled from 'styled-components';
 import React, { Component } from "react";
@@ -94,11 +93,13 @@ class App extends Component {
   ) => {
     console.log(ingredient, cuis, cook_time, budget);
     try {
-      const response = await recipeDB.get(`/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`);
-      this.setState({
-        recipeList: response.data.recipes,
+      const response = await recipeDB.get(`/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`).catch((err) => {
+        console.log(err, err.message);
       });
-      console.log(response.data.recipes);
+      this.setState({
+        recipeList: response.data.response.recipes,
+      });
+      console.log(response.data.response.recipes);
       console.log(this.state.recipeList);
     } catch (err) {
       console.log(err);
@@ -155,6 +156,7 @@ class App extends Component {
             {/* <RecipeList recipes={this.state.recipeList} /> */}
 
             <StyledFlexer>
+              {console.log(this.state.recipeList)}
                 {this.state.recipeList && this.state.recipeList.map((recipe => 
                     (<RecipeCard 
                     CleanedIngredients = {recipe.CleanedIngredients}
@@ -163,6 +165,7 @@ class App extends Component {
                     TranslatedInstructions = {recipe.TranslatedInstructions}
                     TranslatedRecipeName = {recipe.TranslatedRecipeName}
                     imageUrl = {recipe.imageUrl}
+                    budget = {recipe.budget}
                     />)
                 ))}
             </StyledFlexer>
@@ -187,4 +190,5 @@ const StyledFlexer = styled.div`
     justify-content: center;
     align-items: flex-start;
     flex-wrap: wrap;
+    margin-top: 28px;
 `;

@@ -23,7 +23,7 @@ const Home = () => {
           });
         if (response) {
           console.log(response.data)
-          setAllRecipes(response.data.recipes);
+          setAllRecipes(response.data.response.recipes);
         } else {
           console.log("Failed...")
         }
@@ -49,6 +49,7 @@ const Home = () => {
                     TranslatedInstructions = {recipe.TranslatedInstructions}
                     TranslatedRecipeName = {recipe.TranslatedRecipeName}
                     imageUrl = {recipe.imageUrl}
+                    budget = {recipe.budget}
                     />)
                 ))}
             </StyledFlexer>

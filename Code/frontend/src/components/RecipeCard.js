@@ -9,7 +9,8 @@ const RecipeCard = ({
     TotalTimeInMins, 
     TranslatedInstructions, 
     TranslatedRecipeName, 
-    imageUrl 
+    imageUrl,
+    budget,
 }) => {
     console.log(Cuisine);
     const fetchYTId = url => {
@@ -43,6 +44,7 @@ const RecipeCard = ({
                 title="Embedded youtube"
                 />
             </StyledYtIFrame>
+            <StyledBudget>Ingredients Required (Budget: ${budget})</StyledBudget>
             <StyledIngridients>
                 {ingredientList(CleanedIngredients).map(ingredient => (
                     <StyledIngredient>
@@ -123,6 +125,8 @@ const StyledIngridients = styled.div`
     color: #333;
     border-radius: 6px;
     padding: 6px;
+    border-top-left-radius: 0;
+    border-top-right-radius: 0;
 `;
 
 const StyledIngredient = styled.div`
@@ -136,4 +140,14 @@ const StyledInstructions = styled.div`
     text-align: left !important;
     border-top: 4px solid #eeeeee;
     margin-top: 10px;
+`;
+
+const StyledBudget = styled.div`
+    background-color: #bababa;
+    border-top-left-radius: 6px;
+    border-top-right-radius: 6px;
+    opacity: 0.4;
+    padding: 4px 8px;
+    text-align: left;
+    color: black;
 `;
