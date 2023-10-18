@@ -233,7 +233,7 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 - [x] Improved the code test coverage by adding more specialized test cases.
 - [x] Added demo video which shows how the user will interact with our software. -->
 
-### Phase 3:
+<!-- ### Phase 3:
 
 - [x] Added users collection in the database for user accounts.
 - [x] Developed User Interface and APIs for user authorization.
@@ -248,7 +248,33 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 - [x] Add a calorie/nutrients tracker.
 - [x] Updated email format of the recipe results.
 - [x] Fine tune the existing code and wrap up to produce a finished product.
-- [x] Demo video showing deltas from phase-2 to phase-3.
+- [x] Demo video showing deltas from phase-2 to phase-3. -->
+### Phase 4:
+- [x] Refurbished the backend code by cleaning the code
+- [x] Built proper database schema and models
+- [x] Developed codes for controllers and routes
+- [x] Introduced Morgan for logging and cors
+- [x] Introduced a proper authentication system by assigning and deleting json web tokens on log in and log out respectively
+- [x] Encrypted the password on sign up which provides authenticity to the user password
+- [x] Automated and wrote clean tests using chai and mocha
+- [x] Revamped UI for seamless UI Exp
+- [x] Added a signup page to add new users
+- [x] Protected routes (unauthenticated users cannot view website contents)
+- [x] Added react-router-dom to separate pages of interest (previously all cluttered in one page)
+- [x] Home page now shows all the added recipes
+- [x] add-recipe route to add a new recipe.
+- [x] A budget field to later filter recipes using budget
+- [x] search-recipe route filters recipes on the basis of filters provided by the user.
+- [x] Folder restructuring to aid in code maintainability.
+- [x] Organized file extensions.
+- [x] Basic form validation added on forms
+- [x] Use of functional components and ES6 format over the older class-based ES5 syntax
+- [x] Use of react hooks and arrow functions
+- [x] Styling using styled-components
+
+
+
+Regenerate
 
 ## Scope of improvement:
 
