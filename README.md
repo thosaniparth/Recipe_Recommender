@@ -303,6 +303,6 @@ Please see our [CONTRIBUTING.md](https://github.com/PvPatel-1001/Recipe_Recommen
 
 ## Acknowlegements
 
-We would like to thank Professor Dr. Timothy Menzies for helping us understand the process of building a good Software Engineering project. We would also like to thank the teaching assistants Xiao Ling, Andre Lustosa, Kewen Peng and Weichen Shi for their support throughout the project. We would also like to extend our gratitude to previous group: (https://github.com/PvPatel-1001/Recipe_Recommender)
+We would like to thank Professor Dr. Timothy Menzies for helping us understand the process of building a good Software Engineering project. We would also like to thank the teaching assistants San Gilson, Andre Lustosa, Xueqi (Sherry) Yang, Yasitha Rajapaksha and Rahul Yedida for their support throughout the project. We would also like to extend our gratitude to previous group: (https://github.com/thosaniparth/Recipe_Recommender)
 
 <p align="center">Made with ❤️ on GitHub.</p>
