@@ -25,7 +25,10 @@ const Recipe = (recipe) => {
   console.log("time_to_cook", time_to_cook);
   // mapping each ingredient to be displayes as a list item
   ingredients_seperated = ingredients_seperated.map((ingredient) => (
-    <li key={ingredient} className="recipe_ingredient_item"> {ingredient}</li>
+    <li key={ingredient} className="recipe_ingredient_item">
+      {" "}
+      {ingredient}
+    </li>
   ));
   <p>{translated_instruction}</p>;
 
