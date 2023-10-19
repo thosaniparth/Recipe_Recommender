@@ -111,6 +111,7 @@ class Form extends Component {
     const budget = document.getElementById("budget").value;
     const time = document.getElementById("time_to_cook").value;
     const pref = document.getElementById("food_pref").value;
+    console.log("PREFERENCE", pref);
 
     const response = await recipeDB
       .get(
@@ -220,7 +221,7 @@ class Form extends Component {
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
               <label className="sideLabel-new">Preference:</label> <br />
               <select
-                style={{ width: 'auto' }}
+                style={{ width: "auto" }}
                 name="time_to_cook"
                 id="food_pref"
                 className="form-input"
