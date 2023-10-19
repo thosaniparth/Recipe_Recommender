@@ -16,6 +16,7 @@ const RecipeCard = ({
   const fetchYTId = (url) => {
     if (url.length > 0) {
       let tmp = url.split("be/")[1];
+      console.log(tmp);
       tmp = tmp.split("?")[0];
       return tmp;
     }
@@ -152,4 +153,5 @@ const StyledBudget = styled.div`
   padding: 4px 8px;
   text-align: left;
   color: black;
+  font-weight: 800;
 `;
