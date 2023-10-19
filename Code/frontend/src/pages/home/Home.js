@@ -17,13 +17,13 @@ const Home = () => {
     },
   ]);
 
-  const fetchAllRecipe = async (dict) => {
+  const fetchAllRecipe = async () => {
     const response = await recipeDB.get("/recipes").catch((err) => {
       console.log(err, err.message);
     });
     if (response) {
       console.log(response.data);
-      setAllRecipes(response.data.recipes);
+      setAllRecipes(response.data.response.recipes);
     } else {
       console.log("Failed...");
     }
@@ -43,12 +43,14 @@ const Home = () => {
       <StyledFlexer>
         {allRecipes.map((recipe) => (
           <RecipeCard
+            key={recipe.TranslatedRecipeName}
             CleanedIngredients={recipe.CleanedIngredients}
             Cuisine={recipe.Cuisine}
             TotalTimeInMins={recipe.TotalTimeInMins}
             TranslatedInstructions={recipe.TranslatedInstructions}
             TranslatedRecipeName={recipe.TranslatedRecipeName}
             imageUrl={recipe.imageUrl}
+            budget={recipe.budget}
           />
         ))}
       </StyledFlexer>

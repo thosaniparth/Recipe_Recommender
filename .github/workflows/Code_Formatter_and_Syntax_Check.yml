@@ -18,3 +18,10 @@ jobs:
         run: |
             cd Code/backend
             npx eslint ./controllers
+      - name: Changing path
+        run: pwd
+        run: cd Code/frontend
+      - name: Lint Frontend
+        run: |
+            npm install --force
+            npx eslint . --fix

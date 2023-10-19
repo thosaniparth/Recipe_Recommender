@@ -3,7 +3,6 @@ import Form from "./components/Form.js";
 import AddRecipeForm from "./components/AddRecipeForm.js";
 import Header from "./components/Header";
 import recipeDB from "./apis/recipeDB";
-import RecipeList from "./components/RecipeList";
 import RecipeCard from "./components/RecipeCard";
 import styled from "styled-components";
 import React, { Component } from "react";
@@ -11,7 +10,6 @@ import {
   Route,
   Redirect,
   BrowserRouter as Router,
-  Routes,
   Switch,
 } from "react-router-dom";
 import login from "./pages/auth/login";
@@ -60,6 +58,7 @@ class App extends Component {
         "recipes/Addrecipes",
         addRecipeDetails,
       );
+      console.log(response.data);
       // this.setState({
       //   recipeList: response.data.recipes,
       // });
@@ -89,13 +88,17 @@ class App extends Component {
   getRecipeDetails = async (ingredient, cuis, cook_time, budget) => {
     console.log(ingredient, cuis, cook_time, budget);
     try {
-      const response = await recipeDB.get(
-        `/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`,
-      );
+      const response = await recipeDB
+        .get(
+          `/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`,
+        )
+        .catch((err) => {
+          console.log(err, err.message);
+        });
       this.setState({
-        recipeList: response.data.recipes,
+        recipeList: response.data.response.recipes,
       });
-      console.log(response.data.recipes);
+      console.log(response.data.response.recipes);
       console.log(this.state.recipeList);
     } catch (err) {
       console.log(err);
@@ -150,15 +153,18 @@ class App extends Component {
             {/* <RecipeList recipes={this.state.recipeList} /> */}
 
             <StyledFlexer>
+              {console.log(this.state.recipeList)}
               {this.state.recipeList &&
                 this.state.recipeList.map((recipe) => (
                   <RecipeCard
+                    key={recipe.TranslatedRecipeName}
                     CleanedIngredients={recipe.CleanedIngredients}
                     Cuisine={recipe.Cuisine}
                     TotalTimeInMins={recipe.TotalTimeInMins}
                     TranslatedInstructions={recipe.TranslatedInstructions}
                     TranslatedRecipeName={recipe.TranslatedRecipeName}
                     imageUrl={recipe.imageUrl}
+                    budget={recipe.budget}
                   />
                 ))}
             </StyledFlexer>
@@ -183,4 +189,5 @@ const StyledFlexer = styled.div`
   justify-content: center;
   align-items: flex-start;
   flex-wrap: wrap;
+  margin-top: 28px;
 `;

@@ -8,7 +8,7 @@
     "test": "mocha",
     "start": "node app.js",
     "server": "nodemon app.js",
-    "lint": "eslint 'controllers/**.js'",
+    "lint": "eslint controllers/**",
     "format": "prettier --check ./controllers",
     "format:fix": "prettier --write ./controllers"
   },
