@@ -1,6 +1,6 @@
 ## Phase-3 Deltas Explained
 
-https://github.com/thosaniparth/Recipe_Recommender/blob/28f9f89192f8c438e2b1a9e706cdd6069a74cffb/images/recipe-recommender-demo.mp4
+https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/images/recipe-recommender-demo.mp4
 
 ## STA(R) GEN: A STAR RECIPE GENERATOR 🍔
 
@@ -22,8 +22,8 @@ https://github.com/thosaniparth/Recipe_Recommender/blob/28f9f89192f8c438e2b1a9e7
 <!-- [![Running Code Coverage](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/coverage.yml/badge.svg)](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/coverage.yml) -->
 
 [![Style Checker and Prettify Code](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/Style_Checker_and_Prettify_Code.yml/badge.svg)](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/Style_Checker_and_Prettify_Code.yml)
-[![Greetings](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/greetings.yml/badge.svg)](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/greetings.yml)
-![Lines of code](https://img.shields.io/tokei/lines/github/thosaniparth/Recipe_Recommender)
+[![Greetings](https://github.com/thosaniparth/Recipe_Recommender/actions/workflows/greetings.yml/badge.svg)]https://github.com/Shubh-Nisar/Recipe_Recommender/actions/workflows/greetings.yml)
+![Lines of code](https://img.shields.io/badge/Lines%20of%20Code-123.5k-green)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/thosaniparth/Recipe_Recommender)
 
 https://user-images.githubusercontent.com/25223347/140403709-a062e7c5-4500-49d4-9758-aea9e5fa5442.mp4
@@ -45,7 +45,7 @@ Recipe Recommender is a website that suggests users simple food recipes based on
 - [ ] For each recipe, we show the key ingredients, instructions and a sample image.
 - [ ] Upon user request we also send the list of recipes to the user.
 
-Source documentation can be found at: [Recipe Recommender Docs] https://github.com/thosaniparth/Recipe_Recommender/blob/master/docs/Recipe%20Recommender%20Source%20Documentation.pdf
+Source documentation can be found at: [Recipe Recommender Docs] https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/Docs/Recipe%20Recommender%20Source%20Documentation%20-%20Google%20Docs.pdf
 
 ## Technology Stack
 
@@ -53,7 +53,7 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 ![React](https://img.shields.io/badge/react-%2320232a.svg?style=for-the-badge&logo=react&logoColor=%2361DAFB)
 ![Express.js](https://img.shields.io/badge/express.js-%23404d59.svg?style=for-the-badge&logo=express&logoColor=%2361DAFB)
 ![NPM](https://img.shields.io/badge/npm-CB3837?style=for-the-badge&logo=npm&logoColor=white)
-![JEST](https://img.shields.io/badge/Jest-C21325?style=for-the-badge&logo=jest&logoColor=white)
+![Chai](https://img.shields.io/badge/chai.js-323330?style=for-the-badge&logo=chai&logoColor=red)
 ![MongoDB](https://img.shields.io/badge/MongoDB-%234ea94b.svg?style=for-the-badge&logo=mongodb&logoColor=white)
 ![HTML](https://img.shields.io/badge/HTML5-E34F26?style=for-the-badge&logo=html5&logoColor=white)
 ![CSS](https://img.shields.io/badge/CSS3-1572B6?style=for-the-badge&logo=css3&logoColor=white)
@@ -252,27 +252,26 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 
 ### Phase 4:
 
-- [x] Refurbished the backend code by cleaning the code
-- [x] Built proper database schema and models
-- [x] Developed codes for controllers and routes
-- [x] Introduced Morgan for logging and cors
-- [x] Introduced a proper authentication system by assigning and deleting json web tokens on log in and log out respectively
-- [x] Encrypted the password on sign up which provides authenticity to the user password
-- [x] Automated and wrote clean tests using chai and mocha
-- [x] Revamped UI for seamless UI Exp
-- [x] Added a signup page to add new users
-- [x] Protected routes (unauthenticated users cannot view website contents)
-- [x] Added react-router-dom to separate pages of interest (previously all cluttered in one page)
-- [x] Home page now shows all the added recipes
-- [x] add-recipe route to add a new recipe.
-- [x] A budget field to later filter recipes using budget
-- [x] search-recipe route filters recipes on the basis of filters provided by the user.
-- [x] Folder restructuring to aid in code maintainability.
-- [x] Organized file extensions.
-- [x] Basic form validation added on forms
-- [x] Use of functional components and ES6 format over the older class-based ES5 syntax
-- [x] Use of react hooks and arrow functions
-- [x] Styling using styled-components
+- [x] Overhauled the backend code for improved cleanliness and efficiency.
+- [x] Established a well-structured database schema and models.
+- [x] Implemented controllers and routes for smooth functionality.
+- [x] Enhanced logging and CORS support with Morgan and Cors.
+- [x] Instituted a robust authentication system with JSON web tokens.
+- [x] Secured user passwords through encryption during sign-up.
+- [x] Automated testing with Chai and Mocha, ensuring code quality.
+- [x] Revamped the user interface for a seamless user experience.
+- [x] Introduced a user signup page for adding new users.
+- [x] Protected routes to restrict access for unauthenticated users.
+- [x] Employed react-router-dom for organized page navigation.
+- [x] Displayed all recipes on the home page.
+- [x] Added a route for adding new recipes, including a budget filter.
+- [x] Implemented recipe search functionality with user-defined filters.
+- [x] Reorganized project folders to enhance code maintainability.
+- [x] Cleaned up file extensions for consistency.
+- [x] Incorporated basic form validation to enhance user input.
+- [x] Utilized functional components and ES6 syntax, replacing older ES5 classes.
+- [x] Leveraged React hooks and arrow functions for improved code readability.
+- [x] Utilized styled-components for styling the user interface.
 
 Regenerate
 
@@ -283,11 +282,11 @@ Regenerate
 
 ## :page_facing_up: License <a name="License"></a>
 
-This project is licensed under the terms of the MIT license. Please check [License](https://github.com/PvPatel-1001/Recipe_Recommender/blob/master/LICENSE) for more details.
+This project is licensed under the terms of the MIT license. Please check [License](https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/LICENSE) for more details.
 
 ## :pencil2: Contributions <a name="Contributions"></a>
 
-Please see our [CONTRIBUTING.md](https://github.com/PvPatel-1001/Recipe_Recommender/blob/master/CONTRIBUTING.md) for instructions on how to contribute to the project by completing some of the issues.
+Please see our [CONTRIBUTING.md](https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/CONTRIBUTING.md) for instructions on how to contribute to the project by completing some of the issues.
 
 ## Contributors
 
