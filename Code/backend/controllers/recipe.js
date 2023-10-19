@@ -84,7 +84,7 @@ async function getRecipes({
     return { recipesList, totalNumRecipes };
   } catch (e) {
     console.error(
-      `Unable to convert cursor to array or problem counting documents, ${e}`,
+      `Unable to convert cursor to array or problem counting documents, ${e}`
     );
     return { recipesList: [], totalNumRecipes: 0 };
   }
@@ -143,7 +143,7 @@ async function apiPostRecipes(req, res, next) {
   } catch (err) {
     console.log(err);
     throw new Error.BadRequestError(
-      "There is something wrong with the Add Recipe Form",
+      "There is something wrong with the Add Recipe Form"
     );
   }
 }
@@ -194,7 +194,7 @@ async function apiGetRecipes(req, res, next) {
   } catch (error) {
     console.log(error);
     throw new Error.BadRequestError(
-      "There was error processing your queries. Please try again",
+      "There was error processing your queries. Please try again"
     );
   }
 }
