@@ -1,8 +1,5 @@
 import React, { Component } from "react";
-import { useHistory } from "react-router-dom";
 import recipeDB from "../apis/recipeDB";
-import styled from "styled-components";
-import RecipeCard from "./RecipeCard";
 
 // Form component to maintain input form
 class Form extends Component {
@@ -53,9 +50,10 @@ class Form extends Component {
     // mapping each item to be displayed as a list item
     const list_items = items.map((item) => (
       <div
+        key={item}
         onMouseDown={this.removeHandler}
         id={item}
-        class="addedIngredient items-returned"
+        className="addedIngredient items-returned"
         style={{ flexWrap: "wrap" }}
       >
         {" "}
@@ -63,12 +61,12 @@ class Form extends Component {
       </div>
     ));
 
-    return <div class="addedIngredientList">{list_items}</div>;
+    return <div className="addedIngredientList">{list_items}</div>;
   };
 
   // fucntion to add ingredients to the inredients (set datastructure) in App's state
   // triggered by clicking add item button
-  addHandler = (event) => {
+  addHandler = () => {
     const ingredient = document.getElementById("ingredient").value;
 
     if (ingredient.trim() === "") {
@@ -179,12 +177,12 @@ class Form extends Component {
   render() {
     // returns jsx element
     return (
-      <div class="formOutercontainer">
+      <div className="formOutercontainer">
         <form onSubmit={this.handleSubmit}>
-          <div class="add-a-recipe">Search a Recipe</div>
+          <div className="add-a-recipe">Search a Recipe</div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new"> Ingredient: </label>
+              <label className="sideLabel-new"> Ingredient: </label>
               <div>
                 <div className="input-group-append form-input">
                   <input type="text" id="ingredient" />
@@ -200,7 +198,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new"> Cuisine: </label> <br />
+              <label className="sideLabel-new"> Cuisine: </label> <br />
               <div className="input-group-append form-input">
                 <input type="text" id="cuisine" />
               </div>
@@ -209,7 +207,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new"> Budget: </label> <br />
+              <label className="sideLabel-new"> Budget: </label> <br />
               <div className="input-group-append form-input">
                 <input type="text" id="budget" />
               </div>
@@ -218,7 +216,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger text-white flexer-new">
-              <label class="sideLabel-new">Time to cook:</label> <br />
+              <label className="sideLabel-new">Time to cook:</label> <br />
               <select
                 name="time_to_cook"
                 id="time_to_cook"
@@ -236,7 +234,7 @@ class Form extends Component {
               <div className="input-group-append form-input">
                 <div className="row pb-1">
                   <div className="input-group col-lg-4 flexer-new">
-                    <label class="sideLabel-new">Added Items:</label>
+                    <label className="sideLabel-new">Added Items:</label>
                     {this.printHander()}
                   </div>
                 </div>
@@ -258,10 +256,3 @@ class Form extends Component {
 }
 
 export default Form;
-
-const StyledHeader = styled.div`
-  font-size: 32px;
-  text-align: center;
-  margin: 22px auto;
-  font-weight: 800;
-`;

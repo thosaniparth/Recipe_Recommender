@@ -10,7 +10,6 @@ import {
   Route,
   Redirect,
   BrowserRouter as Router,
-  Routes,
   Switch,
 } from "react-router-dom";
 import login from "./pages/auth/login";
@@ -59,6 +58,7 @@ class App extends Component {
         "recipes/Addrecipes",
         addRecipeDetails,
       );
+      console.log(response.data);
       // this.setState({
       //   recipeList: response.data.recipes,
       // });
@@ -88,9 +88,13 @@ class App extends Component {
   getRecipeDetails = async (ingredient, cuis, cook_time, budget) => {
     console.log(ingredient, cuis, cook_time, budget);
     try {
-      const response = await recipeDB.get(`/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`).catch((err) => {
-        console.log(err, err.message);
-      });
+      const response = await recipeDB
+        .get(
+          `/recipes?CleanedIngredients=${ingredient}&Cuisine=${cuis}&budget=${budget}&TotalTimeInMins=${cook_time}`,
+        )
+        .catch((err) => {
+          console.log(err, err.message);
+        });
       this.setState({
         recipeList: response.data.response.recipes,
       });
@@ -150,16 +154,18 @@ class App extends Component {
 
             <StyledFlexer>
               {console.log(this.state.recipeList)}
-                {this.state.recipeList && this.state.recipeList.map((recipe => 
-                    (<RecipeCard 
-                    CleanedIngredients = {recipe.CleanedIngredients}
-                    Cuisine = {recipe.Cuisine}
-                    TotalTimeInMins = {recipe.TotalTimeInMins}
-                    TranslatedInstructions = {recipe.TranslatedInstructions}
-                    TranslatedRecipeName = {recipe.TranslatedRecipeName}
-                    imageUrl = {recipe.imageUrl}
-                    budget = {recipe.budget}
-                    />)
+              {this.state.recipeList &&
+                this.state.recipeList.map((recipe) => (
+                  <RecipeCard
+                    key={recipe.TranslatedRecipeName}
+                    CleanedIngredients={recipe.CleanedIngredients}
+                    Cuisine={recipe.Cuisine}
+                    TotalTimeInMins={recipe.TotalTimeInMins}
+                    TranslatedInstructions={recipe.TranslatedInstructions}
+                    TranslatedRecipeName={recipe.TranslatedRecipeName}
+                    imageUrl={recipe.imageUrl}
+                    budget={recipe.budget}
+                  />
                 ))}
             </StyledFlexer>
           </Route>
@@ -178,10 +184,10 @@ class App extends Component {
 export default App;
 
 const StyledFlexer = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    margin-top: 28px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  margin-top: 28px;
 `;
