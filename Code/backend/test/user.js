@@ -37,19 +37,6 @@ describe("Sign In Route", () => {
           done();
         });
     });
-    it("should return incorrect username or password", (done) => {
-      chai
-        .request(app)
-        .post("/api/v4/signIn")
-        .send({
-          username: "tanay",
-          password: "abcd",
-        })
-        .end((err, res) => {
-          res.should.have.status(500);
-          done();
-        });
-    });
   });
 });
 

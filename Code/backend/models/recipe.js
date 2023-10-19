@@ -1,6 +1,5 @@
 const mongoose = require("mongoose");
 const { Schema } = mongoose;
-const fuzzy = require('mongoose-fuzzy-searching');
 
 const recipeSchema = new Schema(
   {
@@ -43,11 +42,6 @@ const recipeSchema = new Schema(
   { collection: "recipe" },
   
 );
-
-recipeSchema.plugin(fuzzy, {
-  fields:
-     ['Cuisine']
-});
 
 const Recipe = mongoose.model("Recipe", recipeSchema);
 
