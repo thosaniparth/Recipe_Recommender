@@ -1,6 +1,6 @@
 ## Phase-3 Deltas Explained
 
-https://github.com/thosaniparth/Recipe_Recommender/blob/28f9f89192f8c438e2b1a9e706cdd6069a74cffb/images/recipe-recommender-demo.mp4
+https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/images/recipe-recommender-demo.mp4
 
 ## STA(R) GEN: A STAR RECIPE GENERATOR 🍔
 
@@ -45,7 +45,7 @@ Recipe Recommender is a website that suggests users simple food recipes based on
 - [ ] For each recipe, we show the key ingredients, instructions and a sample image.
 - [ ] Upon user request we also send the list of recipes to the user.
 
-Source documentation can be found at: [Recipe Recommender Docs] https://github.com/thosaniparth/Recipe_Recommender/blob/master/docs/Recipe%20Recommender%20Source%20Documentation.pdf
+Source documentation can be found at: [Recipe Recommender Docs] https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/docs/Recipe%20Recommender%20Source%20Documentation.pdf
 
 ## Technology Stack
 
@@ -283,11 +283,11 @@ Regenerate
 
 ## :page_facing_up: License <a name="License"></a>
 
-This project is licensed under the terms of the MIT license. Please check [License](https://github.com/PvPatel-1001/Recipe_Recommender/blob/master/LICENSE) for more details.
+This project is licensed under the terms of the MIT license. Please check [License](https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/LICENSE) for more details.
 
 ## :pencil2: Contributions <a name="Contributions"></a>
 
-Please see our [CONTRIBUTING.md](https://github.com/PvPatel-1001/Recipe_Recommender/blob/master/CONTRIBUTING.md) for instructions on how to contribute to the project by completing some of the issues.
+Please see our [CONTRIBUTING.md](https://github.com/Shubh-Nisar/Recipe_Recommender/blob/master/CONTRIBUTING.md) for instructions on how to contribute to the project by completing some of the issues.
 
 ## Contributors
 
