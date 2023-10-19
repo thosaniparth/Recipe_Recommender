@@ -17,33 +17,17 @@ const Home = () => {
     },
   ]);
 
-<<<<<<< HEAD
-    const fetchAllRecipe = async (dict) => {
-        const response = await recipeDB
-          .get("/recipes")
-          .catch((err) => {
-            console.log(err, err.message);
-          });
-        if (response) {
-          console.log(response.data)
-          setAllRecipes(response.data.response.recipes);
-        } else {
-          console.log("Failed...")
-        }
-      };
-=======
   const fetchAllRecipe = async (dict) => {
     const response = await recipeDB.get("/recipes").catch((err) => {
       console.log(err, err.message);
     });
     if (response) {
       console.log(response.data);
-      setAllRecipes(response.data.recipes);
+      setAllRecipes(response.data.response.recipes);
     } else {
       console.log("Failed...");
     }
   };
->>>>>>> bceff2b6e85447091cb39a5adbb268354d7c530b
 
   useEffect(() => {
     fetchAllRecipe();
@@ -53,26 +37,6 @@ const Home = () => {
     console.log(allRecipes);
   }, [allRecipes]);
 
-<<<<<<< HEAD
-    return (
-        <StyledCenterFlexer>
-            <StyledHeader>My Recipes &#128523;</StyledHeader>
-            <StyledFlexer>
-                {allRecipes.map((recipe => 
-                    (<RecipeCard 
-                    CleanedIngredients = {recipe.CleanedIngredients}
-                    Cuisine = {recipe.Cuisine}
-                    TotalTimeInMins = {recipe.TotalTimeInMins}
-                    TranslatedInstructions = {recipe.TranslatedInstructions}
-                    TranslatedRecipeName = {recipe.TranslatedRecipeName}
-                    imageUrl = {recipe.imageUrl}
-                    budget = {recipe.budget}
-                    />)
-                ))}
-            </StyledFlexer>
-        </StyledCenterFlexer>
-    );
-=======
   return (
     <StyledCenterFlexer>
       <StyledHeader>My Recipes &#128523;</StyledHeader>
@@ -85,12 +49,12 @@ const Home = () => {
             TranslatedInstructions={recipe.TranslatedInstructions}
             TranslatedRecipeName={recipe.TranslatedRecipeName}
             imageUrl={recipe.imageUrl}
+            budget={recipe.budget}
           />
         ))}
       </StyledFlexer>
     </StyledCenterFlexer>
   );
->>>>>>> bceff2b6e85447091cb39a5adbb268354d7c530b
 };
 
 export default Home;

@@ -10,6 +10,7 @@
     "@testing-library/user-event": "^12.8.3",
     "axios": "^0.21.4",
     "bootstrap": "^5.1.1",
+    "eslint": "^4.10.0",
     "jest-junit": "^13.0.0",
     "react": "^17.0.2",
     "react-bootstrap-validation": "^0.1.11",
@@ -24,7 +25,9 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "tests": "CI=true npm run test",
+    "lint": "npx eslint ."
   },
   "eslintConfig": {
     "extends": [
@@ -45,6 +48,8 @@
     ]
   },
   "devDependencies": {
-    "@testing-library/react": "^11.2.7"
+    "@testing-library/react": "^11.2.7",
+    "eslint-plugin-prettier": "^5.0.1",
+    "prettier": "3.0.3"
   }
 }

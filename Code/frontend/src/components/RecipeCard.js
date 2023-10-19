@@ -3,14 +3,14 @@ import "../pages/auth/login.css";
 
 import styled from "styled-components";
 
-const RecipeCard = ({ 
-    CleanedIngredients, 
-    Cuisine, 
-    TotalTimeInMins, 
-    TranslatedInstructions, 
-    TranslatedRecipeName, 
-    imageUrl,
-    budget,
+const RecipeCard = ({
+  CleanedIngredients,
+  Cuisine,
+  TotalTimeInMins,
+  TranslatedInstructions,
+  TranslatedRecipeName,
+  imageUrl,
+  budget,
 }) => {
   console.log(Cuisine);
   const fetchYTId = (url) => {
@@ -27,31 +27,31 @@ const RecipeCard = ({
 
   const url = fetchYTId(imageUrl);
 
-    
-    return (
-        <StyledContainer id='form_login'>
-            <StyledFlexer>
-                <StyledRecipeName>{TranslatedRecipeName}</StyledRecipeName>
-                <StyledTime>{TotalTimeInMins} mins</StyledTime>
-            </StyledFlexer>
-            <StyledYtIFrame>
-                <iframe 
-                width="100%"
-                src={`https://www.youtube.com/embed/${url}`}
-                frameBorder="0"
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-                allowFullScreen
-                title="Embedded youtube"
-                />
-            </StyledYtIFrame>
-            <StyledBudget>Ingredients Required (Budget: ${budget})</StyledBudget>
-            <StyledIngridients>
-                {ingredientList(CleanedIngredients).map(ingredient => (
-                    <StyledIngredient>
-                        {ingredient}{', '}
-                    </StyledIngredient>
-                ))}
-            </StyledIngridients>
+  return (
+    <StyledContainer id="form_login">
+      <StyledFlexer>
+        <StyledRecipeName>{TranslatedRecipeName}</StyledRecipeName>
+        <StyledTime>{TotalTimeInMins} mins</StyledTime>
+      </StyledFlexer>
+      <StyledYtIFrame>
+        <iframe
+          width="100%"
+          src={`https://www.youtube.com/embed/${url}`}
+          frameBorder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowFullScreen
+          title="Embedded youtube"
+        />
+      </StyledYtIFrame>
+      <StyledBudget>Ingredients Required (Budget: ${budget})</StyledBudget>
+      <StyledIngridients>
+        {ingredientList(CleanedIngredients).map((ingredient) => (
+          <StyledIngredient>
+            {ingredient}
+            {", "}
+          </StyledIngredient>
+        ))}
+      </StyledIngridients>
 
       <StyledInstructions>
         <b>Instructions: </b>
@@ -116,19 +116,19 @@ const StyledYtIFrame = styled.div`
 `;
 
 const StyledIngridients = styled.div`
-    display: flex;
-    flex-direction: row;
-    justify-content: flex-start;
-    align-items: flex-start;
-    flex-wrap: wrap;
-    text-align: left;
-    word-wrap: break-word;
-    background-color: #efefef;
-    color: #333;
-    border-radius: 6px;
-    padding: 6px;
-    border-top-left-radius: 0;
-    border-top-right-radius: 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  text-align: left;
+  word-wrap: break-word;
+  background-color: #efefef;
+  color: #333;
+  border-radius: 6px;
+  padding: 6px;
+  border-top-left-radius: 0;
+  border-top-right-radius: 0;
 `;
 
 const StyledIngredient = styled.div`
@@ -145,11 +145,11 @@ const StyledInstructions = styled.div`
 `;
 
 const StyledBudget = styled.div`
-    background-color: #bababa;
-    border-top-left-radius: 6px;
-    border-top-right-radius: 6px;
-    opacity: 0.4;
-    padding: 4px 8px;
-    text-align: left;
-    color: black;
+  background-color: #bababa;
+  border-top-left-radius: 6px;
+  border-top-right-radius: 6px;
+  opacity: 0.4;
+  padding: 4px 8px;
+  text-align: left;
+  color: black;
 `;
