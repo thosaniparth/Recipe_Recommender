@@ -43,8 +43,7 @@ const recipeSchema = new Schema(
 );
 
 recipeSchema.plugin(fuzzy, {
-  fields:
-     ['Cuisine']
+  fields: ["Cuisine"],
 });
 
 const Recipe = mongoose.model("Recipe", recipeSchema);

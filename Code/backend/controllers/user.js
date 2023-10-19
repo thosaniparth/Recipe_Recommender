@@ -1,7 +1,7 @@
 const express = require("express");
 const User = require("../models/user");
 const { generateToken } = require("../utils/generateToken");
-const Error = require("../errors/error")
+const Error = require("../errors/error");
 
 const signUpGet = async (req, res) => {
   try {
