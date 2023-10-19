@@ -293,10 +293,10 @@ Please see our [CONTRIBUTING.md](https://github.com/PvPatel-1001/Recipe_Recommen
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/BosamiyaSimran"><img src="https://avatars.githubusercontent.com/BosamiyaSimran" width="75px;" alt=""/><br /><sub><b>Simran Bosamiya</b></sub></a></td>
-    <td align="center"><a href="https://github.com/thosaniparth"><img src="https://avatars.githubusercontent.com/thosaniparth" width="75px;" alt=""/><br /><sub><b>Parth Thosani</b></sub></a><br /></td>
-    <td align="center"><a href="https://github.com/freakNewton"><img src="https://avatars.githubusercontent.com/freakNewton" width="75px;" alt=""/><br /><sub><b>Nisarg Shah</b></sub></a><br /></td>
-     <td align="center"><a href="https://github.com/sharathKV"><img src="https://avatars.githubusercontent.com/sharathKV" width="75px;" alt=""/><br /><sub><b>SharathKV</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/tvt15"><img src="https://avatars.githubusercontent.com/u/73994466?s=400&u=dc3cc47577ecc7e1951f798a119e08eb96fdaa3a&v=4" width="75px;" alt=""/><br /><sub><b>Tanishq Todkar</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Shubh-Nisar"><img src="https://avatars.githubusercontent.com/u/65038837?v=4" width="75px;" alt=""/><br /><sub><b>Shubh Nisar</b></sub></a><br /></td>
+    <td align="center"><a href="https://github.com/tanay306"><img src="https://github.com/Shubh-Nisar/CSC510-G2/assets/65588226/fe9079fe-93ca-4e96-a7b1-184dfb132a04.png" width="75px;" alt=""/><br /><sub><b>Tanay Gandhi</b></sub></a><br /></td>
+     <td align="center"><a href="https://github.com/Neel317"><img src="https://avatars.githubusercontent.com/u/67258403?v=4" width="75px;" alt=""/><br /><sub><b>Neel Dudehliya</b></sub></a><br /></td>
    
   </tr>
 </table>
