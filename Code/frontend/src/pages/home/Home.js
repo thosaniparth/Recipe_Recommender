@@ -17,7 +17,7 @@ const Home = () => {
     },
   ]);
 
-  const fetchAllRecipe = async (dict) => {
+  const fetchAllRecipe = async () => {
     const response = await recipeDB.get("/recipes").catch((err) => {
       console.log(err, err.message);
     });
@@ -43,6 +43,7 @@ const Home = () => {
       <StyledFlexer>
         {allRecipes.map((recipe) => (
           <RecipeCard
+            key={recipe.TranslatedRecipeName}
             CleanedIngredients={recipe.CleanedIngredients}
             Cuisine={recipe.Cuisine}
             TotalTimeInMins={recipe.TotalTimeInMins}

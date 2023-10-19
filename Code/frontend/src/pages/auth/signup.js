@@ -1,6 +1,6 @@
-import React, { useState, useContext } from "react";
+import React, { useState } from "react";
 import recipeDB from "../../apis/recipeDB";
-import { Redirect, withRouter } from "react-router";
+import { withRouter } from "react-router";
 import "./login.css";
 import styled from "styled-components";
 import { useHistory } from "react-router-dom";

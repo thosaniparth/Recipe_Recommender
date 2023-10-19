@@ -5,7 +5,7 @@
     "allowImportExportEverywhere": false,
     "codeFrame": false
   },
-  "extends": ["airbnb", "plugin:prettier/recommended", "prettier/react"],
+  "extends": ["eslint:recommended", "plugin:react/recommended", "prettier"],
   "env": {
     "browser": true,
     "es6": true,

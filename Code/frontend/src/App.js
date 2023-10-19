@@ -10,7 +10,6 @@ import {
   Route,
   Redirect,
   BrowserRouter as Router,
-  Routes,
   Switch,
 } from "react-router-dom";
 import login from "./pages/auth/login";
@@ -59,6 +58,7 @@ class App extends Component {
         "recipes/Addrecipes",
         addRecipeDetails,
       );
+      console.log(response.data);
       // this.setState({
       //   recipeList: response.data.recipes,
       // });
@@ -157,6 +157,7 @@ class App extends Component {
               {this.state.recipeList &&
                 this.state.recipeList.map((recipe) => (
                   <RecipeCard
+                    key={recipe.TranslatedRecipeName}
                     CleanedIngredients={recipe.CleanedIngredients}
                     Cuisine={recipe.Cuisine}
                     TotalTimeInMins={recipe.TotalTimeInMins}

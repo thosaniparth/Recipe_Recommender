@@ -46,7 +46,7 @@ const RecipeCard = ({
       <StyledBudget>Ingredients Required (Budget: ${budget})</StyledBudget>
       <StyledIngridients>
         {ingredientList(CleanedIngredients).map((ingredient) => (
-          <StyledIngredient>
+          <StyledIngredient key={ingredient}>
             {ingredient}
             {", "}
           </StyledIngredient>
