@@ -7,6 +7,11 @@ const Recipe = require("../models/recipe");
 const Error = require("../errors/error");
 
 //************* Database Queries***************** */
+
+/**
+ * @summary Async Function to add Recipe Form data to database.
+ * @param {Object} RecipeFormData - Form Data from the frontend that will be first parsed by the middleware and then added to the database.
+ * @return {Void} Return Void.*/
 async function postRecipes(addRecipeDetails) {
   console.log("inside model");
   console.log(typeof Recipe);
@@ -18,7 +23,13 @@ async function postRecipes(addRecipeDetails) {
     console.log("Error in Post Recipes", error);
   }
 }
-
+/**
+ * @summary Async Function to fetch Recipes from database based on the given query.
+ * @param {Object} filters - All the filters from the query.
+ * @param {Number} page - Page number for the result data *Not implemented*.
+ * @param {Number} recipesPerPage - Limits the number of results in a api response *Not Implemented*.
+ * @return {Object} Returns { recipesList: [Array], totalNumRecipes: Number }
+ */
 async function getRecipes({
   filters = null,
   page = 0,
@@ -49,7 +60,7 @@ async function getRecipes({
       query.typeOfDiet = filters["typeOfDiet"];
     }
     if (filters.Cuisine) {
-      query["Cuisine"] = filters["Cuisine"];
+      query["Cuisine"] = { $regex: new RegExp(filters["Cuisine"], "i") };
     }
     console.log("Final Query for Database", query);
   }
@@ -59,7 +70,7 @@ async function getRecipes({
   let totalNumRecipes;
 
   try {
-    cursor = await Recipe.find(query).collation({ locale: "en", strength: 2 });
+    cursor = await Recipe.find(query);
     // console.log(cursor);
   } catch (e) {
     console.error(`Unable to issue find command, ${e}`);
@@ -104,7 +115,10 @@ async function getRecipes({
   //     // always executed
   //   });}
 }
-
+/**
+ * @summary Async Function to get all the distinct Cuisine data from the database.
+ * @return {Object} Returns all the documents containing distinct cuisines.
+ */
 async function getCuisines() {
   let cuisines = [];
   try {
@@ -117,7 +131,10 @@ async function getCuisines() {
 }
 
 //*************Recipe Controller******************/
-
+/**
+ * @summary Post Request handler for /Addrecipes route.
+ * @return {Object} Returns Sucess message or error message.
+ */
 async function apiPostRecipes(req, res, next) {
   try {
     console.log("inside controller");
@@ -130,7 +147,10 @@ async function apiPostRecipes(req, res, next) {
     );
   }
 }
-
+/**
+ * @summary Get Recipes request handler for /recipes Route.
+ * @return {Object} Necessary Document based on query or error message.
+ */
 async function apiGetRecipes(req, res, next) {
   const recipesPerPage = req.query.recipesPerPage
     ? parseInt(req.query.recipesPerPage, 10)
@@ -179,7 +199,10 @@ async function apiGetRecipes(req, res, next) {
   }
 }
 
-//Function to get the cuisines
+/**
+ * @summary Get Cuisine Request handler for /cuisine Route.
+ * @return {Object} Returns Cuisines document with Success message or Error.
+ */
 async function apiGetRecipeCuisines(req, res, next) {
   try {
     let cuisines = await getCuisines();

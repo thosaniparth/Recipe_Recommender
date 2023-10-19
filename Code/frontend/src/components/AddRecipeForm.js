@@ -40,7 +40,7 @@ class Form extends Component {
 
     let all_val_filled = [];
     Object.keys(dict).map((key, value) => {
-      console.log(key, dict[key]);
+      console.log(key, dict[key], value);
       if (dict[key] != "") {
         all_val_filled.push(key);
       }
@@ -92,19 +92,20 @@ class Form extends Component {
   // render function dispays the UI content i.e the form content
   render() {
     {
+      console.log("AddRecipeForm Render Function");
     }
 
     // returns jsx element
     return (
-      <div class="formOutercontainer">
+      <div className="formOutercontainer">
         <form onSubmit={this.handleRecipeSubmit} required>
-          <div class="add-a-recipe">Add a Recipe</div>
+          <div className="add-a-recipe">Add a Recipe</div>
           {this.state.error && (
             <StyledError>Kindly fill all the fields.</StyledError>
           )}
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Name: </label>
+              <label className="sideLabel"> Recipe Name: </label>
               <div className="input-group-append">
                 <input type="text" id="recipe_name" required={true} />
               </div>
@@ -113,7 +114,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Ingredients: </label> <br />
+              <label className="sideLabel"> Recipe Ingredients: </label> <br />
               <div className="input-group-append">
                 <input type="textarea" id="recipe_ingredients" required />
               </div>
@@ -122,7 +123,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Instructions: </label> <br />
+              <label className="sideLabel"> Recipe Instructions: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_instructions" required />
               </div>
@@ -131,7 +132,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Budget: </label> <br />
+              <label className="sideLabel"> Recipe Budget: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_budget" required />
               </div>
@@ -140,7 +141,7 @@ class Form extends Component {
 
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Cuisine: </label> <br />
+              <label className="sideLabel"> Recipe Cuisine: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_cuisine" required />
               </div>
@@ -148,7 +149,7 @@ class Form extends Component {
           </div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe Time: </label>
+              <label className="sideLabel"> Recipe Time: </label>
               <div className="input-group-append" style={{ width: "66%" }}>
                 <select
                   name="time_to_cook"
@@ -167,7 +168,7 @@ class Form extends Component {
           </div>
           <div className="row pb-1">
             <div className="input-group col-lg-4 bg-danger flexer">
-              <label class="sideLabel"> Recipe URL: </label> <br />
+              <label className="sideLabel"> Recipe URL: </label> <br />
               <div className="input-group-append">
                 <input type="text" id="recipe_url" />
               </div>

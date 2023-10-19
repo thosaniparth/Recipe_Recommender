@@ -1,10 +1,9 @@
-const chai = require('chai');
-const chaiHttp = require('chai-http');
-const { app }= require("../app");
+const chai = require("chai");
+const chaiHttp = require("chai-http");
+const { app } = require("../app");
 
-chai.use(chaiHttp)
-chai.should()
-
+chai.use(chaiHttp);
+chai.should();
 
 describe('Post Recipes Route', () =>{
   it("should create a document in database", (done) =>{

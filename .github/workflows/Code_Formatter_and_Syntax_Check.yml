@@ -18,3 +18,8 @@ jobs:
         run: |
             cd Code/backend
             npx eslint ./controllers
+      - name: Lint Frontend
+        run: |
+            cd Code/frontend
+            npm install --force
+            npx eslint . --fix
