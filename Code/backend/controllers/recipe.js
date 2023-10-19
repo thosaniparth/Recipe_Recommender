@@ -39,15 +39,14 @@ async function getRecipes({
   console.log("Filters in getRecipes", filters);
   if (filters) {
     if (filters.CleanedIngredients) {
-      // var str = "(?i)";
+      var str = "(?i)";
 
-      // for (var i = 0; i < filters["CleanedIngredients"].length; i++) {
-      //   const str1 = filters["CleanedIngredients"][i];
-      //   str += "(?=.*" + str1 + ")";
-      // }
-      // query.CleanedIngredients = { $regex: str };
-      // console.log("the search string", str);
-      query.CleanedIngredients = filters.CleanedIngredients
+      for (var i = 0; i < filters["CleanedIngredients"].length; i++) {
+        const str1 = filters["CleanedIngredients"][i];
+        str += "(?=.*" + str1 + ")";
+      }
+      query.CleanedIngredients = { $regex: str };
+      console.log("the search string", str);
     }
     var time = parseInt(filters["totalTime"]);
     var budget = parseInt(filters["budget"]);
