@@ -252,27 +252,26 @@ Source documentation can be found at: [Recipe Recommender Docs] https://github.c
 
 ### Phase 4:
 
-- [x] Refurbished the backend code by cleaning the code
-- [x] Built proper database schema and models
-- [x] Developed codes for controllers and routes
-- [x] Introduced Morgan for logging and cors
-- [x] Introduced a proper authentication system by assigning and deleting json web tokens on log in and log out respectively
-- [x] Encrypted the password on sign up which provides authenticity to the user password
-- [x] Automated and wrote clean tests using chai and mocha
-- [x] Revamped UI for seamless UI Exp
-- [x] Added a signup page to add new users
-- [x] Protected routes (unauthenticated users cannot view website contents)
-- [x] Added react-router-dom to separate pages of interest (previously all cluttered in one page)
-- [x] Home page now shows all the added recipes
-- [x] add-recipe route to add a new recipe.
-- [x] A budget field to later filter recipes using budget
-- [x] search-recipe route filters recipes on the basis of filters provided by the user.
-- [x] Folder restructuring to aid in code maintainability.
-- [x] Organized file extensions.
-- [x] Basic form validation added on forms
-- [x] Use of functional components and ES6 format over the older class-based ES5 syntax
-- [x] Use of react hooks and arrow functions
-- [x] Styling using styled-components
+- [x] Overhauled the backend code for improved cleanliness and efficiency.
+- [x] Established a well-structured database schema and models.
+- [x] Implemented controllers and routes for smooth functionality.
+- [x] Enhanced logging and CORS support with Morgan and Cors.
+- [x] Instituted a robust authentication system with JSON web tokens.
+- [x] Secured user passwords through encryption during sign-up.
+- [x] Automated testing with Chai and Mocha, ensuring code quality.
+- [x] Revamped the user interface for a seamless user experience.
+- [x] Introduced a user signup page for adding new users.
+- [x] Protected routes to restrict access for unauthenticated users.
+- [x] Employed react-router-dom for organized page navigation.
+- [x] Displayed all recipes on the home page.
+- [x] Added a route for adding new recipes, including a budget filter.
+- [x] Implemented recipe search functionality with user-defined filters.
+- [x] Reorganized project folders to enhance code maintainability.
+- [x] Cleaned up file extensions for consistency.
+- [x] Incorporated basic form validation to enhance user input.
+- [x] Utilized functional components and ES6 syntax, replacing older ES5 classes.
+- [x] Leveraged React hooks and arrow functions for improved code readability.
+- [x] Utilized styled-components for styling the user interface.
 
 Regenerate
 
