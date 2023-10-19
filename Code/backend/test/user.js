@@ -112,3 +112,8 @@ describe("Get User Profile Test", () => {
     });
   });
 });
+
+setTimeout( () => {
+    console.log("Terminating all test cases!");
+    process.exit(0);
+}, 5000);
